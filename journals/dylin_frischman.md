@@ -1,0 +1,1 @@
+This week we did our initial planning and prep sessions for the project while learning about FastApi and inner and outer joins in SQL.  Our team appears to be good on the planning piece of the project but will need to focus on back-end development and using either NoSQL or Postgres.
