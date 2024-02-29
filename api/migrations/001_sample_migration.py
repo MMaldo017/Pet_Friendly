@@ -7,17 +7,17 @@ steps = [
             name VARCHAR NOT NULL,
             phone_number VARCHAR NOT NULL,
             email VARCHAR NOT NULL,
-            username VARCHAR NOT NULL,
+            username VARCHAR NOT NULL UNIQUE,
             password VARCHAR NOT NULL,
             address VARCHAR NOT NULL,
-            state VARCHAR(2) NOT NULL,
-            zip_code VARCHAR(5) NOT NULL
+            state CHAR(2) NOT NULL,
+            zip_code CHAR(5) NOT NULL
         );
         """,
         # "Down" SQL statement
         """
         DROP TABLE users;
-        """
+        """,
     ],
     [
         # "Up" SQL statement
@@ -32,12 +32,12 @@ steps = [
             day_in DATE,
             day_out DATE,
             owner_id INTEGER NOT NULL REFERENCES users(id)
-            
+
         );
         """,
         # "Down" SQL statement
         """
         DROP TABLE pets;
-        """
-    ]
+        """,
+    ],
 ]
