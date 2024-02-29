@@ -2,37 +2,42 @@ steps = [
     [
         # "Up" SQL statement
         """
-        CREATE TABLE dummy (
+        CREATE TABLE users (
             id SERIAL PRIMARY KEY NOT NULL,
-            required_limited_text VARCHAR(1000) NOT NULL,
-            required_unlimited_text TEXT NOT NULL,
-            required_date_time TIMESTAMP NOT NULL,
-            automatically_set_date_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-            required_integer INTEGER NOT NULL,
-            required_money MONEY NOT NULL
+            name VARCHAR NOT NULL,
+            phone_number VARCHAR NOT NULL,
+            email VARCHAR NOT NULL,
+            username VARCHAR NOT NULL,
+            password VARCHAR NOT NULL,
+            address VARCHAR NOT NULL,
+            state VARCHAR(2) NOT NULL,
+            zip_code VARCHAR(5) NOT NULL
         );
         """,
         # "Down" SQL statement
         """
-        DROP TABLE dummy;
+        DROP TABLE users;
         """
     ],
     [
         # "Up" SQL statement
         """
-        CREATE TABLE big_dummy (
+        CREATE TABLE pets (
             id SERIAL PRIMARY KEY NOT NULL,
-            required_limited_text VARCHAR(1000) NOT NULL,
-            required_unlimited_text TEXT NOT NULL,
-            required_date_time TIMESTAMP NOT NULL,
-            automatically_set_date_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-            required_integer INTEGER NOT NULL,
-            required_money MONEY NOT NULL
+            name VARCHAR NOT NULL,
+            age VARCHAR NOT NULL,
+            breed VARCHAR,
+            pet_type VARCHAR NOT NULL,
+            description VARCHAR,
+            day_in DATE,
+            day_out DATE,
+            owner_id INTEGER NOT NULL REFERENCES users(id)
+            
         );
         """,
         # "Down" SQL statement
         """
-        DROP TABLE big_dummy;
+        DROP TABLE pets;
         """
     ]
 ]
