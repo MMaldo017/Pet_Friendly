@@ -8,7 +8,7 @@ steps = [
             phone_number VARCHAR NOT NULL,
             email VARCHAR NOT NULL,
             username VARCHAR NOT NULL UNIQUE,
-            password VARCHAR NOT NULL,
+            hashed_password VARCHAR NOT NULL,
             address VARCHAR NOT NULL,
             state CHAR(2) NOT NULL,
             zip_code CHAR(5) NOT NULL
@@ -30,9 +30,7 @@ steps = [
             pet_type VARCHAR NOT NULL,
             description VARCHAR,
             day_in DATE,
-            day_out DATE,
-            owner_id INTEGER NOT NULL REFERENCES users(id)
-
+            day_out DATE
         );
         """,
         # "Down" SQL statement

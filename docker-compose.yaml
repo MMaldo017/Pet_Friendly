@@ -4,6 +4,7 @@ volumes:
 services:
     fastapi:
         environment:
+            SIGNING_KEY: cdb2a91ed162a9164afb6c78b7f6cae8f4d19812d171e303048bbde5e439809f
             CORS_HOST: http://localhost:5173
             DATABASE_URL: postgresql://example_user:secret@postgres/example_db
         build:
