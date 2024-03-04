@@ -1,4 +1,5 @@
-Week1:
+## Week1:
+
 Purpose-
 Main part of our planning phase in which we set out to create the layout of our fastapi endpoints and wireframes.
 Issues-
@@ -8,7 +9,8 @@ Comments:
 We made some changes to our endpoints and even added some missing endpoints to our wireframe. Also, we built
 out our database tables to include just users and pets.
 
-Week2:
+## Week2:
+
 Purpose-
 create an endpoint and start our backend authorization
 Issues-

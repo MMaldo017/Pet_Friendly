@@ -1,12 +1,13 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import os
-from routers import users
+from routers import users, pets
 from authenticator import authenticator
 
 
 app = FastAPI()
 app.include_router(users.router)
+app.include_router(pets.router)
 app.include_router(authenticator.router)
 
 
