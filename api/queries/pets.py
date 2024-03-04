@@ -52,7 +52,7 @@ class PetRepository:
                             pet_type=record[4],
                             description=record[5],
                             day_in=str(record[6]),
-                            day_out=record[7],
+                            day_out=str(record[7]),
                             owner_id=record[8],
                         )
                         result.append(pet)
