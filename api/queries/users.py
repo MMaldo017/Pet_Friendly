@@ -38,6 +38,16 @@ class UserOut(BaseModel):
     zip_code: str
 
 
+class UserInfoOut(BaseModel):
+    id: int
+    name: str
+    phone_number: str
+    email: str
+    address: str
+    state: str
+    zip_code: str
+
+
 class UserPetOut(BaseModel):
     id: int
     name: str
@@ -55,21 +65,6 @@ class UserOutWithPassword(UserOut):
 
 
 class UserRepository:
-    def record_to_user_out(self, record) -> UserOutWithPassword:
-        account_dict = {
-            "id": record[0],
-            "name": record[1],
-            "phone_number": record[2],
-            "email": record[3],
-            "username": record[4],
-            "hashed_password": record[5],
-            "address": record[6],
-            "state": record[7],
-            "zip_code": record[8],
-        }
-
-        return account_dict
-
     def create(
         self, user: UserIn, hashed_password: str
     ) -> UserOutWithPassword:
@@ -151,6 +146,33 @@ class UserRepository:
         except Exception:
             return {"message": "Could not get account"}
 
+    def get_all(self) -> Union[Error, List[UserInfoOut]]:
+        try:
+            # connect the database
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    result = db.execute(
+                        """
+                        SELECT
+                        id,
+                        name,
+                        phone_number,
+                        email,
+                        address,
+                        state,
+                        zip_code
+                        FROM users
+                        ORDER BY id;
+                        """
+                    )
+                    return [
+                        self.record_to_user_info_out(record)
+                        for record in result
+                    ]
+        except Exception as e:
+            print(e)
+            return {"message": "Could not get all users"}
+
     def get_user_pets(
         self, id: int
     ) -> Optional[Union[Error, List[UserPetOut]]]:
@@ -170,7 +192,7 @@ class UserRepository:
                     ]
         except Exception as e:
             print(e)
-            return {"message": "Could not get all vacations"}
+            return {"message": "Could not get all pets"}
 
     def record_to_pets_out(self, record):
         return UserPetOut(
@@ -184,3 +206,31 @@ class UserRepository:
             day_out=record[7],
             owner_id=record[8],
         )
+
+    def record_to_user_out(self, record) -> UserOutWithPassword:
+        account_dict = {
+            "id": record[0],
+            "name": record[1],
+            "phone_number": record[2],
+            "email": record[3],
+            "username": record[4],
+            "hashed_password": record[5],
+            "address": record[6],
+            "state": record[7],
+            "zip_code": record[8],
+        }
+
+        return account_dict
+
+    def record_to_user_info_out(self, record) -> UserInfoOut:
+        account_dict = {
+            "id": record[0],
+            "name": record[1],
+            "phone_number": record[2],
+            "email": record[3],
+            "address": record[4],
+            "state": record[5],
+            "zip_code": record[6],
+        }
+
+        return account_dict

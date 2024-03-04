@@ -9,11 +9,13 @@ from fastapi import (
 
 from jwtdown_fastapi.authentication import Token
 from authenticator import authenticator
-from typing import List
+from typing import List, Union
 from pydantic import BaseModel
 from queries.users import (
+    Error,
     UserIn,
     UserOut,
+    UserInfoOut,
     UserPetOut,
     UserRepository,
     DuplicateAccountError,
@@ -36,12 +38,13 @@ class HttpError(BaseModel):
 router = APIRouter()
 
 
-@router.get("/api/protected", response_model=bool)
-async def get_pro_token(
-    request: Request,
-    account_data: dict = Depends(authenticator.get_current_account_data),
-):
-    return True
+# @router.get("/api/protected", response_model=bool)
+# async def get_pro_token(
+#     request: Request,
+#     account_data: dict = Depends(authenticator.get_current_account_data),
+# ):
+#     return True
+# for review on making endpoint protected
 
 
 @router.get("/token", response_model=AccountToken | None)
@@ -77,9 +80,19 @@ async def create_account(
     return AccountToken(account=account, **token.dict())
 
 
-@router.get("/api/users/{user_id}", response_model=List[UserPetOut])
+@router.get("/users", response_model=Union[List[UserInfoOut], Error])
 def get_all(
-    user_id: int, response: Response, repo: UserRepository = Depends()
+    repo: UserRepository = Depends(),
+):
+    return repo.get_all()
+
+
+@router.get("/api/users/{user_id}/pets", response_model=List[UserPetOut])
+def get_user_pets(
+    # account_data: dict = Depends(authenticator.get_current_account_data)
+    user_id: int,
+    response: Response,
+    repo: UserRepository = Depends(),
 ) -> UserPetOut:
     pets = repo.get_user_pets(user_id)
     if pets is None:
