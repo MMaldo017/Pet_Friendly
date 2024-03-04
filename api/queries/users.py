@@ -1,5 +1,7 @@
 import os
+from datetime import date
 from pydantic import BaseModel
+from typing import Optional, List, Union
 from psycopg_pool import ConnectionPool
 
 
@@ -34,6 +36,18 @@ class UserOut(BaseModel):
     address: str
     state: str
     zip_code: str
+
+
+class UserPetOut(BaseModel):
+    id: int
+    name: str
+    age: str
+    breed: Optional[str]
+    pet_type: str
+    description: Optional[str]
+    day_in: Optional[date]
+    day_out: Optional[date]
+    owner_id: int
 
 
 class UserOutWithPassword(UserOut):
@@ -136,3 +150,37 @@ class UserRepository:
                     return self.record_to_user_out(record)
         except Exception:
             return {"message": "Could not get account"}
+
+    def get_user_pets(
+        self, id: int
+    ) -> Optional[Union[Error, List[UserPetOut]]]:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    result = db.execute(
+                        """
+                        SELECT *
+                        FROM pets
+                        WHERE owner_id = %s
+                        """,
+                        [id],
+                    )
+                    return [
+                        self.record_to_pets_out(record) for record in result
+                    ]
+        except Exception as e:
+            print(e)
+            return {"message": "Could not get all vacations"}
+
+    def record_to_pets_out(self, record):
+        return UserPetOut(
+            id=record[0],
+            name=record[1],
+            age=record[2],
+            breed=record[3],
+            pet_type=record[4],
+            description=record[5],
+            day_in=record[6],
+            day_out=record[7],
+            owner_id=record[8],
+        )

@@ -8,12 +8,13 @@ from fastapi import (
 )
 from jwtdown_fastapi.authentication import Token
 from authenticator import authenticator
-
+from typing import List
 from pydantic import BaseModel
 
 from queries.users import (
     UserIn,
     UserOut,
+    UserPetOut,
     UserRepository,
     DuplicateAccountError,
 )
@@ -74,3 +75,13 @@ async def create_account(
     form = AccountForm(username=info.username, password=info.password)
     token = await authenticator.login(response, request, form, repo)
     return AccountToken(account=account, **token.dict())
+
+
+@router.get("/api/users/{user_id}", response_model=List[UserPetOut])
+def get_all(
+    user_id: int, response: Response, repo: UserRepository = Depends()
+) -> UserPetOut:
+    pets = repo.get_user_pets(user_id)
+    if pets is None:
+        response.status_code = 404
+    return pets
