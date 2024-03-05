@@ -15,6 +15,7 @@ from queries.users import (
     Error,
     UserIn,
     UserOut,
+    UserInfoIn,
     UserInfoOut,
     UserPetOut,
     UserRepository,
@@ -80,7 +81,7 @@ async def create_account(
     return AccountToken(account=account, **token.dict())
 
 
-@router.get("/users", response_model=Union[List[UserInfoOut], Error])
+@router.get("/api/users", response_model=Union[List[UserInfoOut], Error])
 def get_all(
     repo: UserRepository = Depends(),
 ):
@@ -92,7 +93,6 @@ def get_user_pets(
     user_id: int,
     response: Response,
     repo: UserRepository = Depends(),
-    account_data: dict = Depends(authenticator.get_current_account_data),
 ) -> UserPetOut:
     pets = repo.get_user_pets(user_id)
     if pets is None:
@@ -110,3 +110,13 @@ def get_user(
     if user is None:
         response.status_code = 404
     return user
+
+
+@router.put("/api/users/{user_id}", response_model=Union[UserInfoOut, Error])
+def update_user(
+    user_id: int,
+    user: UserInfoIn,
+    repo: UserRepository = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data),
+) -> Union[Error, UserInfoOut]:
+    return repo.update(user_id, user)

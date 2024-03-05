@@ -48,6 +48,15 @@ class UserInfoOut(BaseModel):
     zip_code: str
 
 
+class UserInfoIn(BaseModel):
+    name: str
+    phone_number: str
+    email: str
+    address: str
+    state: str
+    zip_code: str
+
+
 class UserPetOut(BaseModel):
     id: int
     name: str
@@ -174,6 +183,33 @@ class UserRepository:
             print(e)
             return {"message": "Could not get all users"}
 
+    def get_user(self, user_id: int) -> Optional[UserInfoOut]:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    result = db.execute(
+                        """
+                        SELECT
+                        id,
+                        name,
+                        phone_number,
+                        email,
+                        address,
+                        state,
+                        zip_code
+                        FROM users
+                        WHERE id = %s
+                        """,
+                        [user_id],
+                    )
+                    record = result.fetchone()
+                    if record is None:
+                        return None
+                    return self.record_to_user_info_out(record)
+        except Exception as e:
+            print(e)
+            return {"message": "Could not get account"}
+
     def get_user_pets(
         self, id: int
     ) -> Optional[Union[Error, List[UserPetOut]]]:
@@ -194,6 +230,36 @@ class UserRepository:
         except Exception as e:
             print(e)
             return {"message": "Could not get all pets"}
+
+    def update(self, user_id: int, user: UserIn) -> Union[UserInfoOut, Error]:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    db.execute(
+                        """
+                        UPDATE users
+                        SET name = %s
+                          , phone_number = %s
+                          , email = %s
+                          , address = %s
+                          , state = %s
+                          , zip_code = %s
+                        WHERE id = %s
+                        """,
+                        [
+                            user.name,
+                            user.phone_number,
+                            user.email,
+                            user.address,
+                            user.state,
+                            user.zip_code,
+                            user_id,
+                        ],
+                    )
+                    return self.user_in_to_out(user_id, user)
+        except Exception as e:
+            print(e)
+            return {"message": "Could not update selected user"}
 
     def record_to_pets_out(self, record):
         return UserPetOut(
@@ -224,6 +290,10 @@ class UserRepository:
 
         return account_dict
 
+    def user_in_to_out(self, id: int, user: UserInfoIn):
+        old_data = user.dict()
+        return UserInfoOut(id=id, **old_data)
+
     def record_to_user_info_out(self, record) -> UserInfoOut:
         account_dict = {
             "id": record[0],
@@ -236,30 +306,3 @@ class UserRepository:
         }
 
         return account_dict
-
-    def get_user(self, user_id: int) -> Optional[UserInfoOut]:
-        try:
-            with pool.connection() as conn:
-                with conn.cursor() as db:
-                    result = db.execute(
-                        """
-                        SELECT
-                        id,
-                        name,
-                        phone_number,
-                        email,
-                        address,
-                        state,
-                        zip_code
-                        FROM users
-                        WHERE id = %s
-                        """,
-                        [user_id],
-                    )
-                    record = result.fetchone()
-                    if record is None:
-                        return None
-                    return self.record_to_user_info_out(record)
-        except Exception as e:
-            print(e)
-            return {"message": "Could not get account"}
