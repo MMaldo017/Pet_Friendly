@@ -126,6 +126,7 @@ def update_user(
 def delete_user(
     user_id: int,
     repo: UserRepository = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data),
 ) -> bool:
     success = repo.delete(user_id)
     if not success:

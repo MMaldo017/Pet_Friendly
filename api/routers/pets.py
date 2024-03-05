@@ -29,6 +29,7 @@ def get_all(
 def create_pet(
     pet_in: PetIn,
     repo: PetRepository = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data),
 ):
 
     created_pet_id = repo.create_pet(pet_in)
