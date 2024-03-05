@@ -16,6 +16,7 @@ class PetIn(BaseModel):
     breed: Optional[str]
     pet_type: str
     description: Optional[str]
+    adoption_status: Optional[str]
     day_in: str
     day_out: Optional[str]
     owner_id: int
@@ -28,9 +29,14 @@ class PetOut(BaseModel):
     breed: Optional[str]
     pet_type: str
     description: Optional[str]
+    adoption_status: Optional[str]
     day_in: str
     day_out: Optional[str]
     owner_id: int
+
+
+class PetIdOut(BaseModel):
+    id: int
 
 
 class PetRepository:
@@ -125,3 +131,57 @@ class PetRepository:
                     )
         except Exception:
             return {"message": "Could not create pet"}
+
+    def update_pet(self, pet_id: int, pet: PetIn) -> Union[PetOut, Error]:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    db.execute(
+                        """
+                        UPDATE pets
+                        SET name = %s,
+                            age = %s,
+                            breed = %s,
+                            pet_type = %s,
+                            description = %s,
+                            adoption_status = %s,
+                            day_in = %s,
+                            day_out = %s,
+                            owner_id = %s
+                        WHERE id = %s
+                        """,
+                        [
+                            pet.name,
+                            pet.age,
+                            pet.breed,
+                            pet.pet_type,
+                            pet.description,
+                            pet.adoption_status,
+                            pet.day_in,
+                            pet.day_out,
+                            pet.owner_id,
+                            pet_id,
+                        ],
+                    )
+                    pet_data = pet.dict()
+                    return PetOut(id=pet_id, **pet_data)
+        except Exception as e:
+            print(e)
+            return {"message": "Could not update pet"}
+
+    def is_valid_pet_id(self, pet_id: int) -> bool:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    db.execute(
+                        """
+                        SELECT id
+                        FROM pets
+                        WHERE id = %s
+                        """,
+                        [pet_id],
+                    )
+                    return bool(db.fetchone())
+        except Exception as e:
+            print(e)
+            return False
