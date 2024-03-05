@@ -55,6 +55,7 @@ class UserPetOut(BaseModel):
     breed: Optional[str]
     pet_type: str
     description: Optional[str]
+    adoption_status: Optional[str]
     day_in: Optional[date]
     day_out: Optional[date]
     owner_id: int
@@ -202,9 +203,10 @@ class UserRepository:
             breed=record[3],
             pet_type=record[4],
             description=record[5],
-            day_in=record[6],
-            day_out=record[7],
-            owner_id=record[8],
+            adoption_status=record[6],
+            day_in=record[7],
+            day_out=record[8],
+            owner_id=record[9],
         )
 
     def record_to_user_out(self, record) -> UserOutWithPassword:
