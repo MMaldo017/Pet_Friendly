@@ -236,3 +236,30 @@ class UserRepository:
         }
 
         return account_dict
+
+    def get_user(self, user_id: int) -> Optional[UserInfoOut]:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    result = db.execute(
+                        """
+                        SELECT
+                        id,
+                        name,
+                        phone_number,
+                        email,
+                        address,
+                        state,
+                        zip_code
+                        FROM users
+                        WHERE id = %s
+                        """,
+                        [user_id],
+                    )
+                    record = result.fetchone()
+                    if record is None:
+                        return None
+                    return self.record_to_user_info_out(record)
+        except Exception as e:
+            print(e)
+            return {"message": "Could not get account"}

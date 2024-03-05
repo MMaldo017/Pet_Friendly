@@ -9,7 +9,7 @@ from fastapi import (
 
 from jwtdown_fastapi.authentication import Token
 from authenticator import authenticator
-from typing import List, Union
+from typing import List, Union, Optional
 from pydantic import BaseModel
 from queries.users import (
     Error,
@@ -98,3 +98,15 @@ def get_user_pets(
     if pets is None:
         response.status_code = 404
     return pets
+
+
+@router.get("/api/users/{user_id}", response_model=Optional[UserInfoOut])
+def get_user(
+    user_id: int,
+    response: Response,
+    repo: UserRepository = Depends(),
+) -> UserInfoOut:
+    user = repo.get_user(user_id)
+    if user is None:
+        response.status_code = 404
+    return user
