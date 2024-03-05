@@ -32,7 +32,7 @@ steps = [
             adoption_status VARCHAR,
             day_in DATE NOT NULL,
             day_out DATE,
-            owner_id INTEGER REFERENCES users(id)
+            owner_id INTEGER REFERENCES users(id) ON DELETE CASCADE
         );
         """,
         # "Down" SQL statement

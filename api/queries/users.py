@@ -261,6 +261,23 @@ class UserRepository:
             print(e)
             return {"message": "Could not update selected user"}
 
+    def delete(self, user_id: int) -> bool:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    result = db.execute(
+                        """
+                        DELETE FROM users
+                        WHERE id = %s
+
+                        """,
+                        [user_id],
+                    )
+                    return result.rowcount > 0
+        except Exception as e:
+            print(e)
+            return False
+
     def record_to_pets_out(self, record):
         return UserPetOut(
             id=record[0],

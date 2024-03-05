@@ -120,3 +120,14 @@ def update_user(
     account_data: dict = Depends(authenticator.get_current_account_data),
 ) -> Union[Error, UserInfoOut]:
     return repo.update(user_id, user)
+
+
+@router.delete("/api/users/{user_id}", response_model=bool)
+def delete_user(
+    user_id: int,
+    repo: UserRepository = Depends(),
+) -> bool:
+    success = repo.delete(user_id)
+    if not success:
+        raise HTTPException(status_code=404, detail="User not found")
+    return success
