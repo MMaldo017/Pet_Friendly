@@ -10,6 +10,17 @@ class Error(BaseModel):
     message: str
 
 
+class PetIn(BaseModel):
+    name: str
+    age: Optional[str]
+    breed: Optional[str]
+    pet_type: str
+    description: Optional[str]
+    day_in: str
+    day_out: Optional[str]
+    owner_id: int
+
+
 class PetOut(BaseModel):
     id: int
     name: str
@@ -60,3 +71,57 @@ class PetRepository:
         except Exception as e:
             print(e)
             return {"message": "Could not get all Pets"}
+
+    def create_pet(self, pet: PetIn) -> PetOut:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    result = db.execute(
+                        """
+                        INSERT INTO pets (
+                            name,
+                            age,
+                            breed,
+                            pet_type,
+                            description,
+                            day_in,
+                            day_out,
+                            owner_id
+                            )
+                        VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+                        RETURNING id,
+                        name,
+                        age,
+                        breed,
+                        pet_type,
+                        description,
+                        day_in,
+                        day_out,
+                        owner_id;
+                        """,
+                        (
+                            pet.name,
+                            pet.age,
+                            pet.breed,
+                            pet.pet_type,
+                            pet.description,
+                            pet.day_in,
+                            pet.day_out,
+                            pet.owner_id,
+                        ),
+                    )
+                    id = result.fetchone()[0]
+
+                    return PetOut(
+                        id=id,
+                        name=pet.name,
+                        age=pet.age,
+                        breed=pet.breed,
+                        pet_type=pet.pet_type,
+                        description=pet.description,
+                        day_in=pet.day_in,
+                        day_out=pet.day_out,
+                        owner_id=pet.owner_id,
+                    )
+        except Exception:
+            return {"message": "Could not create pet"}
