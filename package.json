@@ -1,0 +1,18 @@
+{
+    "name": "pet-friendly",
+    "version": "1.0.0",
+    "description": "You have a project repository, now what? The next section\r lists all of the deliverables that are due at the end of the\r week. Below is some guidance for getting started on the\r tasks for this week.",
+    "main": "index.js",
+    "directories": {
+        "doc": "docs"
+    },
+    "scripts": {
+        "build": "tailwindcss -i ./src/input.css -o ./public/style.css --watch"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "tailwindcss": "^3.4.1"
+    }
+}
