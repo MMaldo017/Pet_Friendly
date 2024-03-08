@@ -156,7 +156,7 @@ class PetRepository:
                             day_in = %s,
                             day_out = %s,
                             owner_id = %s,
-                            photo_url = %s,
+                            photo_url = %s
                         WHERE id = %s
                         """,
                         [
