@@ -1,5 +1,5 @@
 import os
-from pydantic import BaseModel
+from pydantic import BaseModel, AnyUrl
 from psycopg_pool import ConnectionPool
 from typing import List, Union, Optional
 
@@ -20,6 +20,7 @@ class PetIn(BaseModel):
     day_in: str
     day_out: Optional[str]
     owner_id: int
+    photo_url: Optional[AnyUrl]
 
 
 class PetOut(BaseModel):
@@ -33,6 +34,7 @@ class PetOut(BaseModel):
     day_in: str
     day_out: Optional[str]
     owner_id: int
+    photo_url: Optional[AnyUrl]
 
 
 class PetIdOut(BaseModel):
@@ -53,7 +55,8 @@ class PetRepository:
                         pet_type,
                         description,
                         day_in, day_out,
-                        owner_id
+                        owner_id,
+                        photo_url
                         FROM pets
                         ORDER BY pet_type;
 
@@ -71,6 +74,7 @@ class PetRepository:
                             day_in=str(record[6]),
                             day_out=str(record[7]),
                             owner_id=record[8],
+                            photo_url=record[9],
                         )
                         result.append(pet)
                     return result
@@ -92,9 +96,10 @@ class PetRepository:
                             description,
                             day_in,
                             day_out,
-                            owner_id
+                            owner_id,
+                            photo_url
                             )
-                        VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+                        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
                         RETURNING id,
                         name,
                         age,
@@ -103,7 +108,8 @@ class PetRepository:
                         description,
                         day_in,
                         day_out,
-                        owner_id;
+                        owner_id,
+                        photo_url;
                         """,
                         (
                             pet.name,
@@ -114,6 +120,7 @@ class PetRepository:
                             pet.day_in,
                             pet.day_out,
                             pet.owner_id,
+                            pet.photo_url,
                         ),
                     )
                     id = result.fetchone()[0]
@@ -128,6 +135,7 @@ class PetRepository:
                         day_in=pet.day_in,
                         day_out=pet.day_out,
                         owner_id=pet.owner_id,
+                        photo_ur=pet.photo_url,
                     )
         except Exception:
             return {"message": "Could not create pet"}
@@ -147,7 +155,8 @@ class PetRepository:
                             adoption_status = %s,
                             day_in = %s,
                             day_out = %s,
-                            owner_id = %s
+                            owner_id = %s,
+                            photo_url = %s,
                         WHERE id = %s
                         """,
                         [
@@ -160,6 +169,7 @@ class PetRepository:
                             pet.day_in,
                             pet.day_out,
                             pet.owner_id,
+                            pet.photo_url,
                             pet_id,
                         ],
                     )

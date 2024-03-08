@@ -32,7 +32,8 @@ steps = [
             adoption_status VARCHAR,
             day_in DATE NOT NULL,
             day_out DATE,
-            owner_id INTEGER REFERENCES users(id) ON DELETE CASCADE
+            owner_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+            photo_url VARCHAR
         );
         """,
         # "Down" SQL statement

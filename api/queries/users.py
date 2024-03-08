@@ -1,6 +1,6 @@
 import os
 from datetime import date
-from pydantic import BaseModel
+from pydantic import BaseModel, AnyUrl
 from typing import Optional, List, Union
 from psycopg_pool import ConnectionPool
 
@@ -68,6 +68,7 @@ class UserPetOut(BaseModel):
     day_in: Optional[date]
     day_out: Optional[date]
     owner_id: int
+    photo_url: Optional[AnyUrl]
 
 
 class UserOutWithPassword(UserOut):
@@ -290,6 +291,7 @@ class UserRepository:
             day_in=record[7],
             day_out=record[8],
             owner_id=record[9],
+            photo_url=record[10],
         )
 
     def record_to_user_out(self, record) -> UserOutWithPassword:
