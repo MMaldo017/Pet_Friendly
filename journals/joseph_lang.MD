@@ -1,3 +1,11 @@
+## March 4, 2024 - March 8, 2024
+
+-   Finish API Endpoints
+-   Install Tailwind
+-   Create Frontend Components and Pages
+
+This week we finished most of the work that required mob coding. We began creating our stories along with issues for our project. We decided to go with tailwind to style our website. A lot of focus was put towards pages and components since we are starting to work on our frontend and implement functionality in the UI.
+
 ## February 26, 2024 - March 1, 2024
 
 -   Authentication
