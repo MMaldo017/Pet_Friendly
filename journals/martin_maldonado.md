@@ -18,3 +18,15 @@ We had an issue with our UserOut model, where we werent getting back the id crea
 Getting a 401 error when creating a user but the user was still being creted in the database(resolved by a sytax error where the user was being created(users.py - router.post), it was adding the email instead of the username)
 comments:
 Team works really well and we solve issues pretty quickly
+
+## Week3:
+
+Purpose-
+To finish our backend authrorization and start our front end components
+Issues-
+We had an issue where we needed to update the sql to include a photo_url. It was pretty simple, we just needed to import AllUrl in order
+to have basic url imputs into the sql database
+Comments:
+Team is starting to get into their own parts of the projects and it will be individual pushes instead of group pushes.
+I want to have the /pets up by Tuesday with my UseEffect working. Also, we need to discuss how we are going to manage our global
+state.
