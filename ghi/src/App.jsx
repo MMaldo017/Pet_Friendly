@@ -1,6 +1,7 @@
 // This makes VSCode check types as if you are using TypeScript
 //@ts-check
 import { useState, useEffect } from 'react'
+import { BrowserRouter } from 'react-router-dom' // Import BrowserRouter
 import ErrorNotification from './ErrorNotification'
 import Construct from './Construct'
 import Home from './pages/Home' // Import Home from the pages directory
@@ -8,25 +9,12 @@ import './App.css'
 
 // All your environment variables in vite are in this object
 console.table(import.meta.env)
-
-// When using environment variables, you should do a check to see if
-// they are defined or not and throw an appropriate error message
-const API_HOST = import.meta.env.VITE_API_HOST
-
+const API_HOST = import.meta.env.VITE_API_HOST // Use VITE_API_HOST instead of REACT_API_HOST
 if (!API_HOST) {
-    throw new Error('VITE_API_HOST is not defined')
+    throw new Error('VITE_API_HOST is not defined') // Update the error message to reflect the change
 }
 
-/**
- * This is an example of using JSDOC to define types for your component
- * @typedef {{module: number, week: number, day: number, min: number, hour: number}} LaunchInfo
- * @typedef {{launch_details: LaunchInfo, message?: string}} LaunchData
- *
- * @returns {React.ReactNode}
- */
 function App() {
-    // Replace this App component with your own.
-    /** @type {[LaunchInfo | undefined, (info: LaunchInfo) => void]} */
     const [launchInfo, setLaunchInfo] = useState()
     const [error, setError] = useState(null)
 
@@ -35,7 +23,6 @@ function App() {
             let url = `${API_HOST}/api/launch-details`
             console.log('fastapi url: ', url)
             let response = await fetch(url)
-            /** @type {LaunchData} */
             let data = await response.json()
 
             if (response.ok) {
@@ -54,12 +41,16 @@ function App() {
         getData()
     }, [])
 
+    // Extract domain from PUBLIC_URL
+
     return (
-        <div className="App">
-            <ErrorNotification error={error} />
-            <Construct info={launchInfo} />
-            <Home /> {/* Add this line */}
-        </div>
+        <BrowserRouter>
+            <div className="App">
+                <ErrorNotification error={error} />
+                <Construct info={launchInfo} />
+                <Home /> {/* Add this line */}
+            </div>
+        </BrowserRouter>
     )
 }
 

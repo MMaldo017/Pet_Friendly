@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import './Home.css'
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {

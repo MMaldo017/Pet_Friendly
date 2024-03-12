@@ -1,5 +1,5 @@
 // Pets.js
-import React, { useState } from 'react'
+import { useState } from 'react'
 import Modal from './Modal' // Import the Modal component
 import DropdownMenu from './Dropdown'
 

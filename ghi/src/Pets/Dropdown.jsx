@@ -1,6 +1,5 @@
-// DropdownMenu.js
-// DropdownMenu.js
-import React, { useState } from 'react'
+
+import { useState } from 'react'
 
 const DropdownMenu = () => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false)

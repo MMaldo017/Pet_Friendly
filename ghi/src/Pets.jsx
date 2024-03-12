@@ -1,5 +1,3 @@
-import React from 'react'
-
 const Pets = () => {
     return (
         <div className="bg-white py-24 sm:py-32">
