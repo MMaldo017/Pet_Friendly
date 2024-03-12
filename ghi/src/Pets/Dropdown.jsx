@@ -1,8 +1,30 @@
-
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 const DropdownMenu = () => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false)
+    const [types, setTypes] = useState([])
+    const [selectedType, setSelectedType] = useState('')
+    const [loading, setLoading] = useState(true)
+
+    useEffect(() => {
+        async function getTypes() {
+            try {
+                const response = await fetch('http://localhost:8000/api/pets')
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`)
+                }
+
+                const data = await response.json()
+                setTypes(data)
+                setLoading(false)
+            } catch (error) {
+                console.error('Error fetching data:', error.message)
+            }
+        }
+
+        getTypes()
+    }, [])
 
     const toggleDropdown = () => {
         setIsDropdownOpen(!isDropdownOpen)
@@ -17,81 +39,79 @@ const DropdownMenu = () => {
             <div>
                 <button
                     type="button"
-                    className="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-                    id="menu-button"
+                    className="relative w-80 cursor-default rounded-md bg-blue-500 py-1.5 pl-3 pr-10 text-left font-medium text-black-500 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-black-500 sm:text-sm sm:leading-6"
+                    aria-haspopup="listbox"
                     aria-expanded={isDropdownOpen}
-                    aria-haspopup="true"
+                    aria-labelledby="listbox-label"
                     onClick={toggleDropdown}
                 >
-                    Options
-                    <svg
-                        className={`-mr-1 h-5 w-5 text-gray-400 transition-transform ${
-                            isDropdownOpen ? 'transform rotate-180' : ''
-                        }`}
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                        aria-hidden="true"
-                    >
-                        <path
-                            fillRule="evenodd"
-                            d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
-                            clipRule="evenodd"
-                        />
-                    </svg>
+                    <span className="flex items-center">
+                        <span className="ml-3 block truncate">
+                            {selectedType || 'Pet Type'}
+                        </span>
+                    </span>
+                    <span className="pointer-events-none absolute inset-y-0 right-0 ml-3 flex items-center pr-2">
+                        <svg
+                            className="h-5 w-5 text-black-500"
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                            aria-hidden="true"
+                        >
+                            <path
+                                fillRule="evenodd"
+                                d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                                clipRule="evenodd"
+                            />
+                        </svg>
+                    </span>
                 </button>
-            </div>
-            {isDropdownOpen && (
-                <div
-                    className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
-                    role="menu"
-                    aria-orientation="vertical"
-                    aria-labelledby="menu-button"
-                    tabIndex="-1"
-                    onBlur={closeDropdown} // Close dropdown on blur
-                >
-                    <div className="py-1" role="none">
-                        {/* Active: "bg-gray-100 text-gray-900", Not Active: "text-gray-700" */}
-                        <a
-                            href="#"
-                            className="text-gray-700 block px-4 py-2 text-sm"
-                            role="menuitem"
-                            tabIndex="-1"
-                            id="menu-item-0"
-                        >
-                            Account settings
-                        </a>
-                        <a
-                            href="#"
-                            className="text-gray-700 block px-4 py-2 text-sm"
-                            role="menuitem"
-                            tabIndex="-1"
-                            id="menu-item-1"
-                        >
-                            Support
-                        </a>
-                        <a
-                            href="#"
-                            className="text-gray-700 block px-4 py-2 text-sm"
-                            role="menuitem"
-                            tabIndex="-1"
-                            id="menu-item-2"
-                        >
-                            License
-                        </a>
-                        <form method="POST" action="#" role="none">
-                            <button
-                                type="submit"
-                                className="text-gray-700 block w-full px-4 py-2 text-left text-sm"
-                                role="menuitem"
-                                tabIndex="-1"
-                                id="menu-item-3"
+
+                {isDropdownOpen && (
+                    <ul
+                        className="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+                        tabIndex="-1"
+                        role="listbox"
+                        aria-labelledby="listbox-label"
+                        aria-activedescendant="listbox-option-3"
+                        onBlur={closeDropdown} // Close dropdown on blur
+                    >
+                        {loading && (
+                            <li
+                                className="text-gray-900 relative cursor-default select-none py-2 pl-3 pr-9"
+                                id="listbox-option-0"
+                                role="option"
                             >
-                                Sign out
-                            </button>
-                        </form>
-                    </div>
-                </div>
-            )}
+                                <span>Loading...</span>
+                            </li>
+                        )}
+                        {!loading && types.length === 0 && (
+                            <li
+                                className="text-gray-900 relative cursor-default select-none py-2 pl-3 pr-9"
+                                id="listbox-option-0"
+                                role="option"
+                            >
+                                <span>No pet types available</span>
+                            </li>
+                        )}
+                        {!loading &&
+                            types.length > 0 &&
+                            types.map((pet) => (
+                                <li
+                                    key={pet.id}
+                                    className="text-gray-900 relative cursor-default select-none py-2 pl-3 pr-9"
+                                    id={`listbox-option-${pet.id}`}
+                                    role="option"
+                                    onClick={() => {
+                                        setSelectedType(pet.pet_type)
+                                        closeDropdown()
+                                    }}
+                                >
+                                    <span>{pet.pet_type}</span>
+                                </li>
+                            ))}
+                    </ul>
+                )}
+            </div>
         </div>
     )
 }

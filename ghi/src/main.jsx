@@ -3,7 +3,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import Home from './pages/Home' // Import Home from the pages directory
 import Users from './Users.jsx'
-import Pets from './Pets.jsx'
+import Pets from './Pets/Pets.jsx'
 import './index.css'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
