@@ -94,18 +94,20 @@ class PetRepository:
                             breed,
                             pet_type,
                             description,
+                            adoption_status,
                             day_in,
                             day_out,
                             owner_id,
                             photo_url
                             )
-                        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+                        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
                         RETURNING id,
                         name,
                         age,
                         breed,
                         pet_type,
                         description,
+                        adoption_status,
                         day_in,
                         day_out,
                         owner_id,
@@ -117,6 +119,7 @@ class PetRepository:
                             pet.breed,
                             pet.pet_type,
                             pet.description,
+                            pet.adoption_status,
                             pet.day_in,
                             pet.day_out,
                             pet.owner_id,
@@ -132,10 +135,11 @@ class PetRepository:
                         breed=pet.breed,
                         pet_type=pet.pet_type,
                         description=pet.description,
+                        adoption_status=pet.adoption_status,
                         day_in=pet.day_in,
                         day_out=pet.day_out,
                         owner_id=pet.owner_id,
-                        photo_ur=pet.photo_url,
+                        photo_url=pet.photo_url,
                     )
         except Exception:
             return {"message": "Could not create pet"}
