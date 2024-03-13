@@ -75,7 +75,32 @@ class UserOutWithPassword(UserOut):
     hashed_password: str
 
 
+class UsernamesOut(BaseModel):
+    username: str
+
+
 class UserRepository:
+    def get_all_user_detail(self) -> Union[Error, List[UsernamesOut]]:
+        try:
+            # connect the database
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    result = db.execute(
+                        """
+                        SELECT
+                        username
+                        FROM users
+                        ORDER BY username;
+                        """
+                    )
+                    return [
+                        self.record_to_usernames_out(record)
+                        for record in result
+                    ]
+        except Exception as e:
+            print(e)
+            return {"message": "Could not get all usernames"}
+
     def create(
         self, user: UserIn, hashed_password: str
     ) -> UserOutWithPassword:
@@ -325,3 +350,6 @@ class UserRepository:
         }
 
         return account_dict
+
+    def record_to_usernames_out(self, record):
+        return UsernamesOut(username=record[0])

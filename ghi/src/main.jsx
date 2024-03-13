@@ -1,19 +1,17 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import Home from './pages/Home'
-import Users from './Users.jsx'
-import Pets from './Pets/Pets.jsx'
+import App from './App.jsx'
+
 import './index.css'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter } from 'react-router-dom'
+import { AuthProvider } from '@galvanize-inc/jwtdown-for-react'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     <React.StrictMode>
         <BrowserRouter>
-            <Routes>
-                <Route path="/users" element={<Users />} />
-                <Route path="/pets" element={<Pets />} />
-                <Route path="/home" element={<Home />} />
-            </Routes>
+            <AuthProvider baseUrl="http://localhost:8000">
+                <App />
+            </AuthProvider>
         </BrowserRouter>
     </React.StrictMode>
 )

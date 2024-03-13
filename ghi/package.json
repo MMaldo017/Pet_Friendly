@@ -10,8 +10,10 @@
         "preview": "vite preview"
     },
     "dependencies": {
+        "@galvanize-inc/jwtdown-for-react": "^0.2.4",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
+        "react-icons": "^5.0.1",
         "react-router-dom": "^6.22.2"
     },
     "devDependencies": {

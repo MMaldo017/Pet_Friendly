@@ -19,13 +19,14 @@ body::after {
 }
 .adopted-pets-count {
     position: absolute;
-    top: 50px; 
+    top: 50px;
     left: 10%;
     z-index: 3;
     font-size: 1.5em;
     font-weight: bold;
     color: #333;
     text-shadow: 2px 2px 4px #000000;
+    margin-top: 5rem;
 }
 .carousel-container {
     display: flex;
@@ -39,6 +40,7 @@ body::after {
     justify-content: center;
     width: 100%;
     margin-left: 5%;
+    flex-direction: column;
 }
 .button-container {
     flex: 1;

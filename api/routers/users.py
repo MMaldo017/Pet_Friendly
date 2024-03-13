@@ -20,6 +20,7 @@ from queries.users import (
     UserPetOut,
     UserRepository,
     DuplicateAccountError,
+    UsernamesOut,
 )
 
 
@@ -86,6 +87,13 @@ def get_all(
     repo: UserRepository = Depends(),
 ):
     return repo.get_all()
+
+
+@router.get("/api/usernames", response_model=Union[List[UsernamesOut], Error])
+def get_all_usernames(
+    repo: UserRepository = Depends(),
+):
+    return repo.get_all_user_detail()
 
 
 @router.get("/api/users/{user_id}/pets", response_model=List[UserPetOut])
