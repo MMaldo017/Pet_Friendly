@@ -17,11 +17,22 @@ body::after {
     position: absolute;
     z-index: -1;
 }
+.adopted-pets-count {
+    position: absolute;
+    top: 50px; 
+    left: 10%;
+    z-index: 3;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #333;
+    text-shadow: 2px 2px 4px #000000;
+}
 .carousel-container {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
+    margin-top: 70px;
 }
 .carousel {
     display: flex;
@@ -57,4 +68,8 @@ body::after {
 }
 .card.hidden {
     opacity: 0;
+}
+.pet-image {
+    width: 200px;
+    height: 200px;
 }

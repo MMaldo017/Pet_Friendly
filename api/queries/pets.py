@@ -54,12 +54,12 @@ class PetRepository:
                         breed,
                         pet_type,
                         description,
+                        adoption_status,
                         day_in, day_out,
                         owner_id,
                         photo_url
                         FROM pets
                         ORDER BY pet_type;
-
                         """
                     )
                     result = []
@@ -71,10 +71,11 @@ class PetRepository:
                             breed=record[3],
                             pet_type=record[4],
                             description=record[5],
-                            day_in=str(record[6]),
-                            day_out=str(record[7]),
-                            owner_id=record[8],
-                            photo_url=record[9],
+                            adoption_status=record[6],
+                            day_in=str(record[7]),
+                            day_out=str(record[8]),
+                            owner_id=record[9],
+                            photo_url=record[10],
                         )
                         result.append(pet)
                     return result
