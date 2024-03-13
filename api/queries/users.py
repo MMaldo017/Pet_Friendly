@@ -184,7 +184,6 @@ class UserRepository:
 
     def get_all(self) -> Union[Error, List[UserInfoOut]]:
         try:
-            # connect the database
             with pool.connection() as conn:
                 with conn.cursor() as db:
                     result = db.execute(

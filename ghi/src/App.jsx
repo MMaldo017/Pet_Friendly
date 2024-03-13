@@ -10,6 +10,10 @@ import LoginButton from './components/LoginButton'
 import { Routes, Route } from 'react-router-dom'
 import SignUpPage from './pages/SignUpPage'
 import Pets from './Pets/Pets'
+import { Provider } from 'react-redux'
+import store from './store/store'
+import CreatePetForm from './pages/CreatePet'
+import AdminPortal from './pages/AdminPortal'
 
 // All your environment variables in vite are in this object
 console.table(import.meta.env)
@@ -19,43 +23,20 @@ if (!API_HOST) {
 }
 
 function App() {
-    // const [launchInfo, setLaunchInfo] = useState()
-    // const [error, setError] = useState(null)
-
-    // useEffect(() => {
-    //     async function getData() {
-    //         let url = `${API_HOST}/api/launch-details`
-    //         console.log('fastapi url: ', url)
-    //         let response = await fetch(url)
-    //         let data = await response.json()
-
-    //         if (response.ok) {
-    //             if (!data.launch_details) {
-    //                 console.log('drat! no launch data')
-    //                 setError('No launch data')
-    //                 return
-    //             }
-    //             console.log('got launch data!')
-    //             setLaunchInfo(data.launch_details)
-    //         } else {
-    //             console.log('drat! something happened')
-    //             setError(data.message)
-    //         }
-    //     }
-    //     getData()
-    // }, [])
-
-    // Extract domain from PUBLIC_URL
 
     return (
         <div>
             <Navbar />
+            <Provider store={store}>
             <Routes>
                 <Route element={<LoginButton />} />
                 <Route path="/signup" element={<SignUpPage />} />
                 <Route path="/pets" element={<Pets />} />
+                <Route path="/pets/new" element={<CreatePetForm />} />
                 <Route path="/" element={<Home />} />
+                <Route path="/portal" element={<AdminPortal />} />
             </Routes>
+            </Provider>
         </div>
     )
 }

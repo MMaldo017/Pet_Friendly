@@ -1,0 +1,325 @@
+import { useEffect, useState } from 'react'
+
+const UserPetList = ({ user }) => {
+    const [pets, setPets] = useState([])
+    const [selectedPet, setSelectedPet] = useState(null)
+    const [showModal, setShowModal] = useState(false)
+
+    useEffect(() => {
+        const fetchUserPets = async () => {
+            try {
+                const response = await fetch(
+                    `http://localhost:8000/api/users/${user.id}/pets`
+                )
+                const data = await response.json()
+                setPets(data)
+            } catch (error) {
+                console.log('Failed to fetch user pets:', error)
+            }
+        }
+        fetchUserPets()
+    }, [user])
+
+    const handleRowClick = (pet) => {
+        setSelectedPet(pet)
+        setShowModal(true)
+    }
+
+    const handleSubmit = async (event) => {
+        event.preventDefault()
+        try {
+            const response = await fetch(
+                `http://localhost:8000/api/pets/${selectedPet.id}`,
+                {
+                    method: 'PUT',
+                    credentials: 'include',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(selectedPet),
+                }
+            )
+            const updatedPet = await response.json()
+            const updatedPets = pets.map((pet) =>
+                pet.id === updatedPet.id ? updatedPet : pet
+            )
+            setPets(updatedPets)
+        } catch (error) {
+            console.log('Failed to update pet:', error)
+        }
+        setShowModal(false)
+    }
+    console.log(selectedPet)
+
+    return (
+        <div className="flex flex-col">
+            <div className="overflow-x-auto w-full">
+                <div className="min-w-screen flex justify-center font-sans overflow-auto w-full">
+                    <div className="w-full">
+                        <div className="bg-white shadow-md rounded my-6">
+                            <div className="text-2xl">Your Pets</div>
+                            <table className="min-w-max w-full table-auto">
+                                <thead>
+                                    <tr className="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
+                                        <th className="py-3 px-6 text-left"></th>
+                                        <th className="py-3 px-6 text-left">
+                                            Name
+                                        </th>
+                                        <th className="py-3 px-6 text-left">
+                                            Age
+                                        </th>
+                                        <th className="py-3 px-6 text-left">
+                                            Breed
+                                        </th>
+                                        <th className="py-3 px-6 text-left">
+                                            Type
+                                        </th>
+                                        <th className="py-3 px-6 text-left">
+                                            Description
+                                        </th>
+                                        <th className="py-3 px-6 text-left">
+                                            Adoption Status
+                                        </th>
+                                        <th className="py-3 px-6 text-left">
+                                            Day In
+                                        </th>
+                                        <th className="py-3 px-6 text-left">
+                                            Day Out
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody className="text-gray-600 text-sm font-light">
+                                    {pets.map((pet) => (
+                                        <tr
+                                            className="border-b border-gray-200 hover:bg-gray-100 h-10"
+                                            key={pet.id}
+                                            onClick={() => handleRowClick(pet)}
+                                        >
+                                            <td className="py-3 px-6 text-left">
+                                                <img
+                                                    src={pet.photo_url}
+                                                    alt="Pet"
+                                                    style={{
+                                                        width: '50px',
+                                                        height: '50px',
+                                                        borderRadius: '50%',
+                                                    }}
+                                                />
+                                            </td>
+                                            <td className="py-3 px-6 text-left overflow-ellipsis overflow-hidden">
+                                                {pet.name}
+                                            </td>
+                                            <td className="py-3 px-6 text-left">
+                                                {pet.age}
+                                            </td>
+                                            <td className="py-3 px-6 text-left">
+                                                {pet.breed}
+                                            </td>
+                                            <td className="py-3 px-6 text-left">
+                                                {pet.pet_type}
+                                            </td>
+                                            <td className="py-3 px-6 text-left max-w-xs overflow-ellipsis overflow-hidden">
+                                                {pet.description}
+                                            </td>
+                                            <td className="py-3 px-6 text-left">
+                                                {pet.adoption_status
+                                                    ? 'Adopted'
+                                                    : 'Available'}
+                                            </td>
+                                            <td className="py-3 px-6 text-left">
+                                                {pet.day_in}
+                                            </td>
+                                            <td className="py-3 px-6 text-left">
+                                                {pet.day_out
+                                                    ? pet.day_out
+                                                    : 'Still in shelter'}
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                            {showModal && (
+                                <div className="fixed z-10 inset-0 overflow-y-auto">
+                                    <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+                                        <div
+                                            className="fixed inset-0 transition-opacity"
+                                            aria-hidden="true"
+                                            onClick={() => setShowModal(false)}
+                                        >
+                                            <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
+                                        </div>
+
+                                        <span
+                                            className="hidden sm:inline-block sm:align-middle sm:h-screen"
+                                            aria-hidden="true"
+                                        >
+                                            &#8203;
+                                        </span>
+
+                                        <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+                                            <form
+                                                onSubmit={handleSubmit}
+                                                className="flex flex-col"
+                                            >
+                                                <label>
+                                                    Name:
+                                                    <input
+                                                        type="text"
+                                                        value={selectedPet.name}
+                                                        onChange={(e) =>
+                                                            setSelectedPet({
+                                                                ...selectedPet,
+                                                                name: e.target
+                                                                    .value,
+                                                            })
+                                                        }
+                                                    />
+                                                </label>
+                                                <label>
+                                                    Age:
+                                                    <input
+                                                        type="text"
+                                                        value={selectedPet.age}
+                                                        onChange={(e) =>
+                                                            setSelectedPet({
+                                                                ...selectedPet,
+                                                                age: e.target
+                                                                    .value,
+                                                            })
+                                                        }
+                                                    />
+                                                </label>
+                                                <label>
+                                                    Breed:
+                                                    <input
+                                                        type="text"
+                                                        value={
+                                                            selectedPet.breed
+                                                        }
+                                                        onChange={(e) =>
+                                                            setSelectedPet({
+                                                                ...selectedPet,
+                                                                breed: e.target
+                                                                    .value,
+                                                            })
+                                                        }
+                                                    />
+                                                </label>
+                                                <label>
+                                                    Type:
+                                                    <input
+                                                        type="text"
+                                                        value={selectedPet.type}
+                                                        onChange={(e) =>
+                                                            setSelectedPet({
+                                                                ...selectedPet,
+                                                                type: e.target
+                                                                    .value,
+                                                            })
+                                                        }
+                                                    />
+                                                </label>
+                                                <label>
+                                                    Description:
+                                                    <input
+                                                        type="text"
+                                                        value={
+                                                            selectedPet.description
+                                                        }
+                                                        onChange={(e) =>
+                                                            setSelectedPet({
+                                                                ...selectedPet,
+                                                                description:
+                                                                    e.target
+                                                                        .value,
+                                                            })
+                                                        }
+                                                    />
+                                                </label>
+                                                <label>
+                                                    Adoption Status:
+                                                    <input
+                                                        type="text"
+                                                        value={
+                                                            selectedPet.adoption_status
+                                                        }
+                                                        onChange={(e) =>
+                                                            setSelectedPet({
+                                                                ...selectedPet,
+                                                                adoption_status:
+                                                                    e.target
+                                                                        .value,
+                                                            })
+                                                        }
+                                                    />
+                                                </label>
+                                                <label>
+                                                    Day In:
+                                                    <input
+                                                        type="date"
+                                                        value={
+                                                            selectedPet.day_in
+                                                        }
+                                                        onChange={(e) =>
+                                                            setSelectedPet({
+                                                                ...selectedPet,
+                                                                day_in: e.target
+                                                                    .value,
+                                                            })
+                                                        }
+                                                    />
+                                                </label>
+                                                <label>
+                                                    Day Out:
+                                                    <input
+                                                        type="date"
+                                                        value={
+                                                            selectedPet.day_out
+                                                        }
+                                                        onChange={(e) =>
+                                                            setSelectedPet({
+                                                                ...selectedPet,
+                                                                day_out:
+                                                                    e.target
+                                                                        .value,
+                                                            })
+                                                        }
+                                                    />
+                                                </label>
+                                                <label>
+                                                    Photo URL:
+                                                    <input
+                                                        type="text"
+                                                        value={
+                                                            selectedPet.photo_url
+                                                        }
+                                                        onChange={(e) =>
+                                                            setSelectedPet({
+                                                                ...selectedPet,
+                                                                photo_url:
+                                                                    e.target
+                                                                        .value,
+                                                            })
+                                                        }
+                                                    />
+                                                </label>
+                                                <button
+                                                    type="submit"
+                                                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded"
+                                                >
+                                                    Submit
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
+}
+
+export default UserPetList
