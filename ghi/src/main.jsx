@@ -1,7 +1,6 @@
-//@ts-check
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import Home from './pages/Home' // Import Home from the pages directory
+import Home from './pages/Home'
 import Users from './Users.jsx'
 import Pets from './Pets/Pets.jsx'
 import './index.css'

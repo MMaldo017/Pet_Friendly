@@ -73,7 +73,7 @@ const DropdownMenu = () => {
                         role="listbox"
                         aria-labelledby="listbox-label"
                         aria-activedescendant="listbox-option-3"
-                        onBlur={closeDropdown} // Close dropdown on blur
+                        onBlur={closeDropdown}
                     >
                         {loading && (
                             <li

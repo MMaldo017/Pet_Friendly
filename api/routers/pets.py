@@ -3,11 +3,9 @@ from typing import List, Union
 from pydantic import BaseModel
 from fastapi import (
     Depends,
-    # HTTPException,
     status,
     Response,
     APIRouter,
-    # Request,
 )
 from authenticator import authenticator
 
