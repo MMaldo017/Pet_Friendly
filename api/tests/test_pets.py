@@ -22,7 +22,7 @@ class CreatePetQueries:
             "adoption_status": None,
             "day_in": "2024/3/3",
             "day_out": "2024/4/4",
-            "owner_id": 1,
+            "owner_id": 9,
             "photo_url": None,
         }
         result.update(pet)
@@ -49,7 +49,7 @@ def test_create_pet():
         "adoption_status": "Available",
         "day_in": "2024/3/3",
         "day_out": "2024/4/4",
-        "owner_id": 1,
+        "owner_id": 9,
         "photo_url": (
             "https://tse4.mm.bing.net/th?id=OIP.wsAQLK9hlP0iRjbmL3MBYgHaFj"
             "&pid=Api&P=0&h=220"
@@ -65,7 +65,7 @@ def test_create_pet():
         "adoption_status": "Available",
         "day_in": "2024/3/3",
         "day_out": "2024/4/4",
-        "owner_id": 1,
+        "owner_id": 9,
         "photo_url": (
             "https://tse4.mm.bing.net/th?id=OIP.wsAQLK9hlP0iRjbmL3MBYgHaFj"
             "&pid=Api&P=0&h=220"
@@ -73,15 +73,12 @@ def test_create_pet():
     }
     # ACT
     token = (
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9."
-        "eyJqdGkiOiI1NzY0YzI4NS01OTM4LTQ0MzktOTNiMC1kM"
-        "WRmMGFiMmQzMDgiLCJleHAiOjE3MTAzNTAxMzUs"
-        "InN1YiI6InN0cmluZyIsImFjY291bnQiOnsiaWQiOjQs"
-        "Im5hbWUiOiJuYW1lIiwicGhvbmVfbnVtYmVyIjoi"
-        "c3RyaW5nIiwiZW1haWwiOiJzdHJpbmciLCJ1c2VybmFtZSI6"
-        "InRvZGF5IiwiYWRkcmVzcyI6InN0cmluZyIs"
-        "InN0YXRlIjoibGEiLCJ6aXBfY29kZSI6IjcwNDU4In19."
-        "KnbjOO9nHje0oMGUlJyt-yaMayqWd0SSQxl7rK1WaTU"
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIxZWFiZjQ0Zi0y"
+        "NTE1LTQwNWMtODdmNi1mOGRkZGQ5ZTU2OTIiLCJleHAiOjE3MTAzNjQ5NDEsInN1YiI6"
+        "InN0cmluZyIsImFjY291bnQiOnsiaWQiOjksIm5hbWUiOiJibGFoIiwicGhvbmVfbnVtY"
+        "mVyIjoic3RyaW5nIiwiZW1haWwiOiJzdHJpbmciLCJ1c2VybmFtZSI6ImJsYWgiLCJhZG"
+        "RyZXNzIjoic3RyaW5nIiwic3RhdGUiOiJsYSIsInppcF9jb2RlIjoiNzA0NTgifX0.ekm"
+        "ZIUbBIwN0pUSwuLfQJe6ochF3UYn31O3jATp0nf4"
     )
     headers = {"Authorization": f"Bearer {token}"}
     response = client.post("/api/pets", json=pet_data, headers=headers)
