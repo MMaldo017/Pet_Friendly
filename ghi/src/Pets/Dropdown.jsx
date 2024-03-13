@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react'
 
-const DropdownMenu = () => {
+const DropdownMenu = ({ setSelectedType }) => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false)
     const [types, setTypes] = useState([])
-    const [selectedType, setSelectedType] = useState('')
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
@@ -46,9 +45,7 @@ const DropdownMenu = () => {
                     onClick={toggleDropdown}
                 >
                     <span className="flex items-center">
-                        <span className="ml-3 block truncate">
-                            {selectedType || 'Pet Type'}
-                        </span>
+                        <span className="ml-3 block truncate">Pet Type</span>
                     </span>
                     <span className="pointer-events-none absolute inset-y-0 right-0 ml-3 flex items-center pr-2">
                         <svg
@@ -93,22 +90,36 @@ const DropdownMenu = () => {
                                 <span>No pet types available</span>
                             </li>
                         )}
-                        {!loading &&
-                            types.length > 0 &&
-                            types.map((pet) => (
+                        {!loading && (
+                            <>
                                 <li
-                                    key={pet.id}
+                                    key="all"
                                     className="text-gray-900 relative cursor-default select-none py-2 pl-3 pr-9"
-                                    id={`listbox-option-${pet.id}`}
+                                    id={`listbox-option-all`}
                                     role="option"
                                     onClick={() => {
-                                        setSelectedType(pet.pet_type)
+                                        setSelectedType(null)
                                         closeDropdown()
                                     }}
                                 >
-                                    <span>{pet.pet_type}</span>
+                                    <span>All</span>
                                 </li>
-                            ))}
+                                {types.map((pet) => (
+                                    <li
+                                        key={pet.id}
+                                        className="text-gray-900 relative cursor-default select-none py-2 pl-3 pr-9"
+                                        id={`listbox-option-${pet.id}`}
+                                        role="option"
+                                        onClick={() => {
+                                            setSelectedType(pet.pet_type)
+                                            closeDropdown()
+                                        }}
+                                    >
+                                        <span>{pet.pet_type}</span>
+                                    </li>
+                                ))}
+                            </>
+                        )}
                     </ul>
                 )}
             </div>

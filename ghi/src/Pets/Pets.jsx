@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react'
+import DropdownMenu from './Dropdown'
 
 const Pets = () => {
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [types, setTypes] = useState([])
     const [selectedPet, setSelectedPet] = useState(null)
     const [user, setUser] = useState({})
+    const [selectedType, setSelectedType] = useState(null)
 
     useEffect(() => {
         async function getTypes() {
@@ -71,8 +73,16 @@ const Pets = () => {
 
     useEffect(() => {}, [isModalOpen])
 
+    const filteredPets = selectedType
+        ? types.filter((pet) => pet.pet_type === selectedType)
+        : types
+
     return (
         <section className="text-gray-600 body-font">
+            <DropdownMenu
+                setSelectedType={setSelectedType}
+                selectedType={selectedType}
+            />
             <div className="container px-5 py-24 mx-auto">
                 <div className="flex flex-col text-center w-full mb-20">
                     <h1 className="sm:text-3xl text-2xl font-medium title-font mb-4 text-blue-500">
@@ -88,7 +98,7 @@ const Pets = () => {
                     </p>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {types.map((pet) => (
+                    {filteredPets.map((pet) => (
                         <div key={pet.id} className="relative">
                             <div className="relative group">
                                 <img
