@@ -5,3 +5,6 @@ We were able to get ahead and have completed implementation of postgres db, crea
 
 Week of 3/4:
 The team continues to drive ahead and will likely be done with MVP by midweek next week. This week we completed our endpoints tied to the MVP and finished up the backend authoriztion on applicable endpoints. Front end development continues, I have only completed 1 front end component that has yet to be pushed to main however the component I am working on will be part of an user admin page and require dynamic rendering based on the logged in user so I am working on storing the user ID from the token in a global state using an RTK query and have figured out the logic needed to render the elments of the 6 API calls that will require them for the admin page.
+
+Week of 3/4:
+This week I completed the redux work and functionality for the admin page that have multiple components utilizing several API calls and presenting forms for self-service functionality housed within modals. I also completed the get all user pets unit test. My brain is tired.

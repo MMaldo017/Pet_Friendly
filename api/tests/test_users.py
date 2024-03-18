@@ -55,6 +55,34 @@ def test_get_all_users():
     assert response.json() == []
 
 
+def test_get_all_user_pets():
+    class MockUserRepository(UserRepository):
+        def get_user_pets(self, id):
+            return [
+                {
+                    "id": 1,
+                    "name": "string",
+                    "age": "string",
+                    "breed": "string",
+                    "pet_type": "string",
+                    "description": "string",
+                    "adoption_status": "string",
+                    "day_in": "2024-03-06",
+                    "day_out": "2024-03-06",
+                    "owner_id": 1,
+                    "photo_url": "https://www.google.com/",
+                }
+            ]
+
+    app.dependency_overrides[UserRepository] = MockUserRepository
+
+    response = client.get("/api/users/1/pets")
+    assert response.status_code == 200
+    assert response.json() == MockUserRepository().get_user_pets(1)
+
+    app.dependency_overrides = {}
+
+
 def test_create_user():
     # ARRANGE
     app.dependency_overrides[UserRepository] = CreateUserQueries
