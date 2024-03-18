@@ -73,12 +73,13 @@ def test_create_pet():
     }
     # ACT
     token = (
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIxZWFiZjQ0Zi0y"
-        "NTE1LTQwNWMtODdmNi1mOGRkZGQ5ZTU2OTIiLCJleHAiOjE3MTAzNjQ5NDEsInN1YiI6"
-        "InN0cmluZyIsImFjY291bnQiOnsiaWQiOjksIm5hbWUiOiJibGFoIiwicGhvbmVfbnVtY"
-        "mVyIjoic3RyaW5nIiwiZW1haWwiOiJzdHJpbmciLCJ1c2VybmFtZSI6ImJsYWgiLCJhZG"
-        "RyZXNzIjoic3RyaW5nIiwic3RhdGUiOiJsYSIsInppcF9jb2RlIjoiNzA0NTgifX0.ekm"
-        "ZIUbBIwN0pUSwuLfQJe6ochF3UYn31O3jATp0nf4"
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI0M2RkNjBlNS1iNWIw"
+        "LTRhNGUtYTg2ZC1kMDRkZTU2MGQ2YTEiLCJleHAiOjE3MTA0Mzg4MzEsInN1YiI6I"
+        "mNoYXJsZXMuYWdhckBpY2xvdWQuY29tIiwiYWNjb3VudCI6eyJpZCI6MTEsIm5hbW"
+        "UiOiJmcm9udGVuZCIsInBob25lX251bWJlciI6Ijk4NTI5MDQ2OTEiLCJlbWFpbCI"
+        "6ImNoYXJsZXMuYWdhckBpY2xvdWQuY29tIiwidXNlcm5hbWUiOiJmcm9udGVuZCIsI"
+        "mFkZHJlc3MiOiIxNzI1IG1hcnkgZHIiLCJzdGF0ZSI6IkxBIiwiemlwX2NvZGUiOi"
+        "I3MDQ1OCJ9fQ.xWi0gTxeB4fJTstp6WjfAxa3NjjkEX1t-DbF4etXoMs"
     )
     headers = {"Authorization": f"Bearer {token}"}
     response = client.post("/api/pets", json=pet_data, headers=headers)
