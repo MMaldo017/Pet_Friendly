@@ -2,9 +2,11 @@ import { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import useToken from '@galvanize-inc/jwtdown-for-react'
 import { IoClose } from 'react-icons/io5'
+import { useNavigate } from 'react-router-dom'
 import Alert from './Alert'
 const LoginButton = () => {
     const { login, token, logout } = useToken()
+    const navigate = useNavigate()
     const [isOpen, setIsOpen] = useState(false)
 
     const [logInData, setLogInData] = useState({
@@ -51,6 +53,7 @@ const LoginButton = () => {
             setTimeout(() => {
                 setButtonVisible(true)
             }, 4000)
+            navigate('/')
         } catch (error) {
             console.error('Log out failed', error)
         }
@@ -76,6 +79,7 @@ const LoginButton = () => {
                 setTimeout(() => {
                     setButtonVisible(true)
                 }, 4000)
+                navigate('/portal')
             } else {
                 handleLoginError()
             }

@@ -1,8 +1,10 @@
 import { NavLink } from 'react-router-dom'
 import { GiHamburgerMenu } from 'react-icons/gi'
 import { useState } from 'react'
+import useToken from '@galvanize-inc/jwtdown-for-react'
 import LoginButton from './LoginButton'
 const Navbar = () => {
+    const { token } = useToken()
     const [mobileDropDown, setMobileDropDown] = useState(false)
     const handleMobileNav = () => {
         setMobileDropDown(!mobileDropDown)
@@ -14,6 +16,11 @@ const Navbar = () => {
                     Pet Friendly
                 </NavLink>
                 <ul className="hidden md:flex gap-[2rem] items-center">
+                    {token && (
+                        <li className="hover:text-white transition-colors duration-300">
+                            <NavLink to="/portal">Portal</NavLink>
+                        </li>
+                    )}
                     <li className="hover:text-white transition-colors duration-300">
                         <NavLink to="/pets">Pets</NavLink>
                     </li>
