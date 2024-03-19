@@ -46,6 +46,11 @@ class CreateUserQueries:
             }
         return None
 
+    def delete(self, user_id):
+        if user_id == 1:
+            return True
+        return False
+
 
 def test_get_all_users():
     app.dependency_overrides[UserRepository] = EmptyUserRepository
@@ -53,6 +58,18 @@ def test_get_all_users():
     app.dependency_overrides = {}
     assert response.status_code == 200
     assert response.json() == []
+
+
+def test_delete_user():
+    user_id = 1
+    app.dependency_overrides[UserRepository] = CreateUserQueries
+    token = "insert access_token here"
+    headers = {"Authorization": f"Bearer {token}"}
+    response = client.delete(f"/api/users/{user_id}", headers=headers)
+    app.dependency_overrides = {}
+    print(response.json())
+    assert response.status_code == 200
+    assert response.json()
 
 
 def test_get_all_user_pets():
@@ -98,14 +115,15 @@ def test_create_user():
     }
     # ACT
     token = (
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJhNjhmMWU"
-        "xNS1lNmViLTRkYTEtOGI3Zi01YzlmYmVhZDg4YTUiLCJleHAiOjE3MTAz"
-        "NjA4MTUsInN1YiI6InN0cmluZyIsImFjY291bnQiOnsiaWQiOjcsIm5hbWU"
-        "iOiJtYXJ0aW4iLCJwaG9uZV9udW1iZXIiOiJzdHJpbmciLCJlbWFpbCI6In"
-        "N0cmluZyIsInVzZXJuYW1lIjoibWFydGluIiwiYWRkcmVzcyI6InN0cmluZy"
-        "IsInN0YXRlIjoidHgiLCJ6aXBfY29kZSI6IjcwNDg4In19.sAz7YqFRrtFKEg"
-        "P70UWumEQ20_26djIIKRlmyIAstX4"
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI0M2RkNjBlNS1iNWIw"
+        "LTRhNGUtYTg2ZC1kMDRkZTU2MGQ2YTEiLCJleHAiOjE3MTA0Mzg4MzEsInN1YiI6I"
+        "mNoYXJsZXMuYWdhckBpY2xvdWQuY29tIiwiYWNjb3VudCI6eyJpZCI6MTEsIm5hbW"
+        "UiOiJmcm9udGVuZCIsInBob25lX251bWJlciI6Ijk4NTI5MDQ2OTEiLCJlbWFpbCI"
+        "6ImNoYXJsZXMuYWdhckBpY2xvdWQuY29tIiwidXNlcm5hbWUiOiJmcm9udGVuZCIsI"
+        "mFkZHJlc3MiOiIxNzI1IG1hcnkgZHIiLCJzdGF0ZSI6IkxBIiwiemlwX2NvZGUiOi"
+        "I3MDQ1OCJ9fQ.xWi0gTxeB4fJTstp6WjfAxa3NjjkEX1t-DbF4etXoMs"
     )
+
     headers = {"Authorization": f"Bearer {token}"}
     response = client.post("/api/users", json=user_data, headers=headers)
     print("RESPONSE", response.status_code)
