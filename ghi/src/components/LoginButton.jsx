@@ -107,7 +107,7 @@ const LoginButton = () => {
                     </button>
                 )}
                 {isOpen && (
-                    <div className="absolute right-0 mt-[0.5rem] w-[15rem] bg-white rounded-lg shadow-lg">
+                    <div className="absolute right-0 mt-[0.5rem] w-[15rem] bg-white rounded-lg shadow-lg z-50">
                         <form onSubmit={handleFormLogin} className="p-[1rem]">
                             <div className="flex justify-between">
                                 <h1 className="text-3xl font-bold mb-[0.5rem]">

@@ -38,7 +38,19 @@ const Navbar = () => {
                 </div>
             </nav>
             {mobileDropDown && (
-                <ul className=" pt-[2.5rem] md:hidden text-white leading-[80px] fixed h-[100vh] w-[100%] bg-blue-500 flex flex-col items-center gap-[1rem]">
+                <ul className=" pt-[2.5rem] md:hidden text-white leading-[80px] fixed h-[100vh] w-[100%] bg-blue-500 flex flex-col items-center gap-[1rem] z-40">
+                    {token && (
+                        <li className="cursor-pointer transition-colors duration-300 w-[50vw] flex justify-center bg-black rounded-lg hover:text-blue-500 ">
+                            <NavLink
+                                className="flex justify-center"
+                                style={{ width: '100%' }}
+                                onClick={handleMobileNav}
+                                to="/portal"
+                            >
+                                Portal
+                            </NavLink>
+                        </li>
+                    )}
                     <li className="cursor-pointer transition-colors duration-300 w-[50vw] flex justify-center bg-black rounded-lg hover:text-blue-500 ">
                         <NavLink
                             className="flex justify-center"
@@ -54,7 +66,7 @@ const Navbar = () => {
                             className="flex justify-center"
                             style={{ width: '100%' }}
                             onClick={handleMobileNav}
-                            to="/home"
+                            to="/"
                         >
                             Home
                         </NavLink>
