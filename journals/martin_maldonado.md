@@ -30,3 +30,12 @@ Comments:
 Team is starting to get into their own parts of the projects and it will be individual pushes instead of group pushes.
 I want to have the /pets up by Tuesday with my UseEffect working. Also, we need to discuss how we are going to manage our global
 state.
+
+## Week4:
+
+Purpose:
+To finish our frontend components, global state, and unittest
+Issues:
+No issues this week:
+Comments:
+Team has been working great and going to finish up unit test early next week and we will be down with everthing that is required for the project

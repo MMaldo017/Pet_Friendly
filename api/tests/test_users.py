@@ -146,3 +146,29 @@ def test_create_user():
 
 def test_init():
     assert 1 == 1
+
+
+def test_get_user():
+    class MockUserRepository(UserRepository):
+        def get_user(self, user_id):
+            if user_id == 1:
+                return {
+                    "id": 1,
+                    "name": "martin maldonado",
+                    "phone_number": "1234567",
+                    "email": "martin@email.com",
+                    "address": "123",
+                    "state": "WA",
+                    "zip_code": "12345",
+                }
+
+            return None
+
+    app.dependency_overrides[UserRepository] = MockUserRepository
+
+    response = client.get("/api/users/1")
+
+    assert response.status_code == 200
+    assert response.json() == MockUserRepository().get_user(1)
+
+    app.dependency_overrides = {}
