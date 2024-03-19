@@ -23,7 +23,7 @@ const AdminPortal = () => {
         <div className="flex flex-col sm:flex-row px-4">
             <div className="flex flex-col pr-2 sm:w-3/4">
                 <div className="w-full">
-                    <div className="container mx-auto w-full">
+                    <div className="container mx-auto w-full py-4">
                         {<CreatePetButton />}
                     </div>
                     <div className="container mx-auto overflow-auto">

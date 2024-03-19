@@ -57,40 +57,59 @@ function CreatePetForm() {
         <div className="flex items-center justify-center min-h-screen bg-gray-100">
             <div className="w-full max-w-md p-8 space-y-4 bg-white rounded shadow-md">
                 <form onSubmit={handleSubmit} className="space-y-4">
+                    <h1 className="text-3xl font-bold mb-[0.5rem]">
+                        Add A Pet!
+                    </h1>
+                    <div className="block text-gray-700 text-sm font-bold mb-[0.5rem]">
+                        Name
+                    </div>
                     <input
                         name="name"
                         value={form.name}
                         onChange={handleChange}
-                        className="w-full p-2 border border-gray-300 rounded"
+                        className="shadow appearance-none border rounded w-full py-[0.7rem] px-[0.7rem] text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         placeholder="Name"
                     />
+                    <div className="block text-gray-700 text-sm font-bold mb-[0.5rem]">
+                        Age
+                    </div>
                     <input
                         name="age"
                         value={form.age}
                         onChange={handleChange}
-                        className="w-full p-2 border border-gray-300 rounded"
+                        className="shadow appearance-none border rounded w-full py-[0.7rem] px-[0.7rem] text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         placeholder="Age"
                     />
+                    <div className="block text-gray-700 text-sm font-bold mb-[0.5rem]">
+                        Breed
+                    </div>
                     <input
                         name="breed"
                         value={form.breed}
                         onChange={handleChange}
-                        className="w-full p-2 border border-gray-300 rounded"
+                        className="shadow appearance-none border rounded w-full py-[0.7rem] px-[0.7rem] text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         placeholder="Breed"
                     />
+                    <div className="block text-gray-700 text-sm font-bold mb-[0.5rem]">
+                        Pet Type
+                    </div>
                     <input
                         name="pet_type"
                         value={form.pet_type}
                         onChange={handleChange}
-                        className="w-full p-2 border border-gray-300 rounded"
+                        className="shadow appearance-none border rounded w-full py-[0.7rem] px-[0.7rem] text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         placeholder="Pet Type"
                     />
+                    <div className="block text-gray-700 text-sm font-bold mb-[0.5rem]">
+                        Day They Arrived at Shelter
+                    </div>
                     <input
                         name="day_in"
+                        type="date"
                         value={form.day_in}
                         onChange={handleChange}
                         className="w-full p-2 border border-gray-300 rounded"
-                        placeholder="Day In"
+                        placeholder="Day Arrived at Shelter"
                     />
                     <button
                         type="submit"

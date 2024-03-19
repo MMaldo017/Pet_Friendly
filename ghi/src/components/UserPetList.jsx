@@ -156,14 +156,19 @@ const UserPetList = ({ user }) => {
                                             &#8203;
                                         </span>
 
-                                        <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+                                        <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full p-6">
                                             <form
                                                 onSubmit={handleSubmit}
-                                                className="flex flex-col"
+                                                className="flex flex-col space-y-4"
                                             >
-                                                <label>
+                                                <h1 className="text-3xl font-bold">
+                                                    Update info for{' '}
+                                                    {selectedPet.name}!
+                                                </h1>
+                                                <label className="text-gray-700">
                                                     Name:
                                                     <input
+                                                        className="border-2 rounded-lg focus:border-blue-500 focus:border-4 focus:outline-none focus:shadow-2xl ml-3"
                                                         type="text"
                                                         value={selectedPet.name}
                                                         onChange={(e) =>
@@ -175,9 +180,10 @@ const UserPetList = ({ user }) => {
                                                         }
                                                     />
                                                 </label>
-                                                <label>
+                                                <label className="text-gray-700">
                                                     Age:
                                                     <input
+                                                        className="border-2 rounded-lg focus:border-blue-500 focus:border-4 focus:outline-none focus:shadow-2xl ml-3"
                                                         type="text"
                                                         value={selectedPet.age}
                                                         onChange={(e) =>
@@ -189,9 +195,10 @@ const UserPetList = ({ user }) => {
                                                         }
                                                     />
                                                 </label>
-                                                <label>
+                                                <label className="text-gray-700">
                                                     Breed:
                                                     <input
+                                                        className="border-2 rounded-lg focus:border-blue-500 focus:border-4 focus:outline-none focus:shadow-2xl ml-3"
                                                         type="text"
                                                         value={
                                                             selectedPet.breed
@@ -205,9 +212,10 @@ const UserPetList = ({ user }) => {
                                                         }
                                                     />
                                                 </label>
-                                                <label>
+                                                <label className="text-gray-700">
                                                     Type:
                                                     <input
+                                                        className="border-2 rounded-lg focus:border-blue-500 focus:border-4 focus:outline-none focus:shadow-2xl ml-3"
                                                         type="text"
                                                         value={selectedPet.type}
                                                         onChange={(e) =>
@@ -219,9 +227,10 @@ const UserPetList = ({ user }) => {
                                                         }
                                                     />
                                                 </label>
-                                                <label>
+                                                <label className="text-gray-700">
                                                     Description:
                                                     <input
+                                                        className="border-2 rounded-lg focus:border-blue-500 focus:border-4 focus:outline-none focus:shadow-2xl ml-3"
                                                         type="text"
                                                         value={
                                                             selectedPet.description
@@ -236,9 +245,10 @@ const UserPetList = ({ user }) => {
                                                         }
                                                     />
                                                 </label>
-                                                <label>
+                                                <label className="text-gray-700">
                                                     Adoption Status:
                                                     <input
+                                                        className="border-2 rounded-lg focus:border-blue-500 focus:border-4 focus:outline-none focus:shadow-2xl ml-3"
                                                         type="text"
                                                         value={
                                                             selectedPet.adoption_status
@@ -253,9 +263,10 @@ const UserPetList = ({ user }) => {
                                                         }
                                                     />
                                                 </label>
-                                                <label>
-                                                    Day In:
+                                                <label className="text-gray-700">
+                                                    Date Arrived At Shelter:
                                                     <input
+                                                        className="border-2 rounded-lg focus:border-blue-500 focus:border-4 focus:outline-none focus:shadow-2xl ml-3"
                                                         type="date"
                                                         value={
                                                             selectedPet.day_in
@@ -269,9 +280,10 @@ const UserPetList = ({ user }) => {
                                                         }
                                                     />
                                                 </label>
-                                                <label>
-                                                    Day Out:
+                                                <label className="text-gray-700">
+                                                    Date Left Shelter:
                                                     <input
+                                                        className="border-2 rounded-lg focus:border-blue-500 focus:border-4 focus:outline-none focus:shadow-2xl ml-3"
                                                         type="date"
                                                         value={
                                                             selectedPet.day_out
@@ -286,10 +298,11 @@ const UserPetList = ({ user }) => {
                                                         }
                                                     />
                                                 </label>
-                                                <label>
+                                                <label className="text-gray-700">
                                                     Photo URL:
                                                     <input
-                                                        type="text"
+                                                        className="border-2 rounded-lg focus:border-blue-500 focus:border-4 focus:outline-none focus:shadow-2xl ml-3"
+                                                        type="url"
                                                         value={
                                                             selectedPet.photo_url
                                                         }
@@ -305,7 +318,7 @@ const UserPetList = ({ user }) => {
                                                 </label>
                                                 <button
                                                     type="submit"
-                                                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded"
+                                                    className="flex flex-col items-center justify-center mt-[2rem] bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded w-full"
                                                 >
                                                     Submit
                                                 </button>

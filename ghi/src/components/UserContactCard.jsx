@@ -58,19 +58,20 @@ const UserContactCard = ({ user }) => {
         <div className="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl m-3">
             <div className="md:flex">
                 <div className="p-8">
-                    <div className="uppercase tracking-wide text-sm text-indigo-500 font-semibold">
+                    <h1 className="text-3xl font-bold">{userData.name}</h1>
+                    <div className="uppercase tracking-wide text-sm text-blue-500 font-semibold py-1">
                         User ID: {userData.id}
                     </div>
-                    <p className="block mt-1 text-lg leading-tight font-medium text-black">
-                        {userData.name}
-                    </p>
-                    <p className="mt-2 text-gray-500">
+                    <p className="mt-2 text-gray-600 py-1">
                         {userData.phone_number}
                     </p>
-                    <p className="mt-2 text-gray-500">{userData.email}</p>
-                    <p className="mt-2 text-gray-500">{userData.address}</p>
-                    <p className="mt-2 text-gray-500">{userData.state}</p>
-                    <p className="mt-2 text-gray-500">{userData.zip_code}</p>
+                    <p className="mt-2 text-gray-600 py-1">{userData.email}</p>
+                    <p className="mt-2 text-gray-600 py-1">
+                        {userData.address}
+                    </p>
+                    <p className="mt-2 text-gray-600 py-1">
+                        {userData.state}, {userData.zip_code}
+                    </p>
                     <button
                         onClick={() => setShowModal(true)}
                         className="mt-4 inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
@@ -97,11 +98,18 @@ const UserContactCard = ({ user }) => {
                             &#8203;
                         </span>
 
-                        <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
-                            <form onSubmit={handleSubmit}>
+                        <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full p-6">
+                            <form
+                                onSubmit={handleSubmit}
+                                className="flex flex-col space-y-4"
+                            >
+                                <h1 className="text-3xl font-bold">
+                                    Update Shelter Info
+                                </h1>
                                 <label>
                                     Name:
                                     <input
+                                        className="border-2 rounded-lg focus:border-blue-500 focus:border-4 focus:outline-none focus:shadow-2xl ml-3"
                                         type="text"
                                         name="name"
                                         value={editData.name}
@@ -111,6 +119,7 @@ const UserContactCard = ({ user }) => {
                                 <label>
                                     Phone Number:
                                     <input
+                                        className="border-2 rounded-lg focus:border-blue-500 focus:border-4 focus:outline-none focus:shadow-2xl ml-3"
                                         type="text"
                                         name="phone_number"
                                         value={editData.phone_number}
@@ -120,6 +129,7 @@ const UserContactCard = ({ user }) => {
                                 <label>
                                     Email:
                                     <input
+                                        className="border-2 rounded-lg focus:border-blue-500 focus:border-4 focus:outline-none focus:shadow-2xl ml-3"
                                         type="text"
                                         name="email"
                                         value={editData.email}
@@ -129,6 +139,7 @@ const UserContactCard = ({ user }) => {
                                 <label>
                                     Address:
                                     <input
+                                        className="border-2 rounded-lg focus:border-blue-500 focus:border-4 focus:outline-none focus:shadow-2xl ml-3"
                                         type="text"
                                         name="address"
                                         value={editData.address}
@@ -138,8 +149,10 @@ const UserContactCard = ({ user }) => {
                                 <label>
                                     State:
                                     <input
+                                        className="border-2 rounded-lg focus:border-blue-500 focus:border-4 focus:outline-none focus:shadow-2xl ml-3"
                                         type="text"
                                         name="state"
+                                        maxLength={2}
                                         value={editData.state}
                                         onChange={handleInputChange}
                                     />
@@ -147,13 +160,20 @@ const UserContactCard = ({ user }) => {
                                 <label>
                                     Zip Code:
                                     <input
+                                        className="border-2 rounded-lg focus:border-blue-500 focus:border-4 focus:outline-none focus:shadow-2xl ml-3"
                                         type="text"
                                         name="zip_code"
+                                        maxLength={5}
                                         value={editData.zip_code}
                                         onChange={handleInputChange}
                                     />
                                 </label>
-                                <button type="submit">Submit</button>
+                                <button
+                                    type="submit"
+                                    className="flex flex-col items-center justify-center mt-[2rem] bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded w-full"
+                                >
+                                    Submit
+                                </button>
                             </form>
                         </div>
                     </div>
