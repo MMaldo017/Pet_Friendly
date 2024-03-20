@@ -1,9 +1,12 @@
 import { useState, useEffect } from 'react'
-
+import { useNavigate } from 'react-router-dom'
+import useToken from '@galvanize-inc/jwtdown-for-react'
 const UserContactCard = ({ user }) => {
     const [userData, setUserData] = useState(null)
     const [showModal, setShowModal] = useState(false)
     const [editData, setEditData] = useState({})
+    const navigate = useNavigate()
+    const { token, logout } = useToken()
 
     useEffect(() => {
         const fetchData = async () => {
@@ -27,6 +30,22 @@ const UserContactCard = ({ user }) => {
             ...editData,
             [event.target.name]: event.target.value,
         })
+    }
+
+    const handleDelete = async (user_id) => {
+        const url = `http://localhost:8000/api/users/${user_id}`
+        const fetchOptions = {
+            method: 'DELETE',
+            headers: {
+                'Content-type': 'application/json',
+                Authorization: `Bearer ${token}`,
+            },
+        }
+        const req = await fetch(url, fetchOptions)
+        if (req.ok) {
+            await logout(userData.username, userData.password)
+            navigate('/')
+        }
     }
 
     const handleSubmit = async (event) => {
@@ -72,12 +91,20 @@ const UserContactCard = ({ user }) => {
                     <p className="mt-2 text-gray-600 py-1">
                         {userData.state}, {userData.zip_code}
                     </p>
-                    <button
-                        onClick={() => setShowModal(true)}
-                        className="mt-4 inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                    >
-                        Edit
-                    </button>
+                    <div className="flex flex-col items-start">
+                        <button
+                            onClick={() => setShowModal(true)}
+                            className="mt-4 w-44 inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                        >
+                            Edit
+                        </button>
+                        <button
+                            onClick={() => handleDelete(userData.id)}
+                            className="mt-4 w-44  inline-block bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                        >
+                            Delete Account
+                        </button>
+                    </div>
                 </div>
             </div>
             {showModal && (
