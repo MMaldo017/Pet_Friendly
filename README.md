@@ -170,3 +170,266 @@ in GitLab.
 Merge a change into main to kick off the initial deploy. Once the build pipeline
 finishes you should be able to see an "under construction" page on your GitLab
 pages site.
+
+### API Documentation
+
+#### Users
+
+| Action                                  | Method | URL                                       |
+| --------------------------------------- | ------ | ----------------------------------------- |
+| [Get all users](#get-all-users)         | GET    | http://localhost:8000/api/users           |
+| [Create user](#create-a-user)           | POST   | http://localhost:8000/api/users           |
+| [Get all usernames](#get-all-usernames) | GET    | http://localhost:8000/api/usernames       |
+| [Get user pets](#get-user-pets)         | GET    | http://localhost:8000/{user_id}/pets      |
+| [Get user](#get-user)                   | GET    | http://localhost:8000/api/users/{user_id} |
+| [Update user](#update-a-user)           | PUT    | http://localhost:8000/api/users/{user_id} |
+| [Delete user](#delete-a-user)           | DELETE | http://localhost:8000/api/users/{user_id} |
+
+#### Get all users
+
+##### Response:
+
+```
+[
+  {
+    "id": 0,
+    "name": "string",
+    "phone_number": "string",
+    "email": "string",
+    "address": "string",
+    "state": "string",
+    "zip_code": "string"
+  }
+]
+```
+
+#### Create a user
+
+##### Request body:
+
+```
+{
+  "name": "string",
+  "phone_number": "string",
+  "email": "string",
+  "username": "string",
+  "password": "string",
+  "address": "string",
+  "state": "string",
+  "zip_code": "string"
+}
+```
+
+##### Response:
+
+```
+{
+  "access_token": "string",
+  "token_type": "Bearer",
+  "account": {
+    "id": 0,
+    "name": "string",
+    "phone_number": "string",
+    "email": "string",
+    "username": "string",
+    "address": "string",
+    "state": "string",
+    "zip_code": "string"
+  }
+}
+```
+
+#### Get all usernames
+
+##### Response:
+
+```
+[
+  {
+    "username": "string"
+  }
+]
+```
+
+#### Get user pets
+
+##### Response:
+
+```
+[
+  {
+    "id": 0,
+    "name": "string",
+    "age": "string",
+    "breed": "string",
+    "pet_type": "string",
+    "description": "string",
+    "adoption_status": "string",
+    "day_in": "2024-03-20",
+    "day_out": "2024-03-20",
+    "owner_id": 0,
+    "photo_url": "string"
+  }
+]
+```
+
+#### Get user
+
+##### Response:
+
+```
+{
+  "id": 0,
+  "name": "string",
+  "phone_number": "string",
+  "email": "string",
+  "address": "string",
+  "state": "string",
+  "zip_code": "string"
+}
+
+```
+
+#### Update a user
+
+##### Request body:
+
+```
+{
+  "name": "string",
+  "phone_number": "string",
+  "email": "string",
+  "address": "string",
+  "state": "string",
+  "zip_code": "string"
+}
+```
+
+##### Response:
+
+```
+{
+  "id": 0,
+  "name": "string",
+  "phone_number": "string",
+  "email": "string",
+  "address": "string",
+  "state": "string",
+  "zip_code": "string"
+}
+```
+
+#### Delete a user
+
+##### Response:
+
+```
+true
+```
+
+---
+
+#### Pets
+
+| Action                        | Method | URL                            |
+| ----------------------------- | ------ | ------------------------------ |
+| [Get all pets](#get-all-pets) | GET    | http://localhost/api/pets      |
+| [Create a pet](#create-a-pet) | POST   | http://localhost/api/pets      |
+| [Update a pet](#update-a-pet) | PUT    | http://localhost/pets/{pet_id} |
+
+#### Get all pets
+
+##### Response:
+
+```
+[
+  {
+    "id": 1,
+    "name": "string",
+    "age": "string",
+    "breed": "string",
+    "pet_type": "string",
+    "description": null,
+    "adoption_status": null,
+    "day_in": "2024-03-21",
+    "day_out": "None",
+    "owner_id": 0,
+    "photo_url": null
+  }
+]
+```
+
+#### Create a pet
+
+##### Request body:
+
+```
+{
+  "name": "string",
+  "age": "string",
+  "breed": "string",
+  "pet_type": "string",
+  "description": "string",
+  "adoption_status": "string",
+  "day_in": "string",
+  "day_out": "string",
+  "owner_id": 0,
+  "photo_url": "string"
+}
+
+```
+
+##### Response:
+
+```
+{
+  "id": 1,
+  "name": "string",
+  "age": "string",
+  "breed": "string",
+  "pet_type": "string",
+  "description": "string",
+  "adoption_status": "string",
+  "day_in": "string",
+  "day_out": "string",
+  "owner_id": 0,
+  "photo_url": "string"
+}
+```
+
+#### Update a pet
+
+##### Request:
+
+```
+{
+  "name": "string",
+  "age": "string",
+  "breed": "string",
+  "pet_type": "string",
+  "description": "string",
+  "adoption_status": "string",
+  "day_in": "string",
+  "day_out": "string",
+  "owner_id": 0,
+  "photo_url": "string"
+}
+```
+
+##### Response:
+
+```
+
+  "id": 0,
+  "name": "string",
+  "age": "string",
+  "breed": "string",
+  "pet_type": "string",
+  "description": "string",
+  "adoption_status": "string",
+  "day_in": "string",
+  "day_out": "string",
+  "owner_id": 0,
+  "photo_url": "string"
+}
+```
