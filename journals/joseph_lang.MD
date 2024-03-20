@@ -1,3 +1,13 @@
+## March 11, 2024 - March 14, 2024
+
+-   Unit Tests
+-   Frontend Components
+-   Frontend Styling
+-   Deployment
+-   Frontend Auth
+
+This week we focused on our frontend to give our website functionality with the endpoints we created. Frontend authentication was completed this week. We started looking into unit tests and how we are gong to implement them. We connected all of our backend and frontend to bring our website to life. The main focus this week was bringing all the functionality from the backend to the frontend for the UI.
+
 ## March 4, 2024 - March 8, 2024
 
 -   Finish API Endpoints
