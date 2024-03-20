@@ -1,5 +1,8 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 
+ const API_HOST = import.meta.env.VITE_API_HOST // Use VITE_API_HOST instead of REACT_API_HOST
+
+
 const initialState = {
     status: 'idle',
     user: null,
@@ -10,7 +13,7 @@ export const fetchByToken = createAsyncThunk(
     'user/fetchByToken',
     async (_, { rejectWithValue }) => {
         try {
-            const response = await fetch(`http://localhost:8000/token`, {
+            const response = await fetch(`${API_HOST}/token`, {
                 credentials: 'include',
             })
             if (!response.ok) {

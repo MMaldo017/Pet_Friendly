@@ -1,5 +1,8 @@
 import { useState, useEffect } from 'react'
 
+ const API_HOST = import.meta.env.VITE_API_HOST // Use VITE_API_HOST instead of REACT_API_HOST
+
+
 const DropdownMenu = ({ setSelectedType }) => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false)
     const [types, setTypes] = useState([])
@@ -8,7 +11,7 @@ const DropdownMenu = ({ setSelectedType }) => {
     useEffect(() => {
         async function getTypes() {
             try {
-                const response = await fetch('http://localhost:8000/api/pets')
+                const response = await fetch(`${API_HOST}/api/pets`)
 
                 if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`)

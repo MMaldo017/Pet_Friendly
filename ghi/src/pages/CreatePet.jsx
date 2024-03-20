@@ -3,6 +3,9 @@ import { useSelector, useDispatch } from 'react-redux'
 import { fetchByToken } from '../store/userSlice'
 import { useNavigate } from 'react-router-dom'
 
+ const API_HOST = import.meta.env.VITE_API_HOST // Use VITE_API_HOST instead of REACT_API_HOST
+
+
 function CreatePetForm() {
     const dispatch = useDispatch()
     const { user } = useSelector((state) => state.user)
@@ -39,7 +42,7 @@ function CreatePetForm() {
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
-            await fetch('http://localhost:8000/api/pets', {
+            await fetch(`${API_HOST}/api/pets`, {
                 method: 'POST',
                 credentials: 'include',
                 headers: {

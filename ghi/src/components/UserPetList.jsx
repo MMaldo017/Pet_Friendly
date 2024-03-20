@@ -1,5 +1,8 @@
 import { useEffect, useState } from 'react'
 
+ const API_HOST = import.meta.env.VITE_API_HOST // Use VITE_API_HOST instead of REACT_API_HOST
+
+
 const UserPetList = ({ user }) => {
     const [pets, setPets] = useState([])
     const [selectedPet, setSelectedPet] = useState(null)
@@ -9,7 +12,7 @@ const UserPetList = ({ user }) => {
         const fetchUserPets = async () => {
             try {
                 const response = await fetch(
-                    `http://localhost:8000/api/users/${user.id}/pets`
+                    `${API_HOST}/api/users/${user.id}/pets`
                 )
                 const data = await response.json()
                 setPets(data)
@@ -29,7 +32,7 @@ const UserPetList = ({ user }) => {
         event.preventDefault()
         try {
             const response = await fetch(
-                `http://localhost:8000/api/pets/${selectedPet.id}`,
+                `${API_HOST}/api/pets/${selectedPet.id}`,
                 {
                     method: 'PUT',
                     credentials: 'include',
