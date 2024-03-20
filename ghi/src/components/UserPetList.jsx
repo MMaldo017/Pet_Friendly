@@ -124,9 +124,7 @@ const UserPetList = ({ user }) => {
                                                 {pet.description}
                                             </td>
                                             <td className="py-3 px-6 text-left">
-                                                {pet.adoption_status
-                                                    ? 'Adopted'
-                                                    : 'Available'}
+                                                {pet.adoption_status}
                                             </td>
                                             <td className="py-3 px-6 text-left">
                                                 {pet.day_in}
