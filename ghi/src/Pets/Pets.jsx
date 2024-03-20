@@ -14,7 +14,7 @@ const Pets = () => {
     useEffect(() => {
         async function getTypes() {
             try {
-                const response = await fetch(`${API_HOST}/api/pets/`)
+                const response = await fetch(`${API_HOST}/api/pets`)
 
                 if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`)
