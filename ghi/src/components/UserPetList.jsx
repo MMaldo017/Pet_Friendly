@@ -51,7 +51,6 @@ const UserPetList = ({ user }) => {
         }
         setShowModal(false)
     }
-    console.log(selectedPet)
 
     return (
         <div className="flex flex-col">
@@ -250,9 +249,8 @@ const UserPetList = ({ user }) => {
                                                 </label>
                                                 <label className="text-gray-700">
                                                     Adoption Status:
-                                                    <input
+                                                    <select
                                                         className="border-2 rounded-lg focus:border-blue-500 focus:border-4 focus:outline-none focus:shadow-2xl ml-3"
-                                                        type="text"
                                                         value={
                                                             selectedPet.adoption_status
                                                         }
@@ -264,7 +262,14 @@ const UserPetList = ({ user }) => {
                                                                         .value,
                                                             })
                                                         }
-                                                    />
+                                                    >
+                                                        <option value="Adopted">
+                                                            Adopted
+                                                        </option>
+                                                        <option value="Available">
+                                                            Available
+                                                        </option>
+                                                    </select>
                                                 </label>
                                                 <label className="text-gray-700">
                                                     Date Arrived At Shelter:
