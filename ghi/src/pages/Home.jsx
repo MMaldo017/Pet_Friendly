@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react'
 import './Home.css'
 
+ const API_HOST = import.meta.env.VITE_API_HOST // Use VITE_API_HOST instead of REACT_API_HOST
+
+
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1))
@@ -15,7 +18,7 @@ const Home = () => {
     const [activePetIndex, setActivePetIndex] = useState(0)
 
     useEffect(() => {
-        fetch('http://localhost:8000/api/pets')
+        fetch(`${API_HOST}/api/pets`)
             .then((response) => response.json())
             .then((data) => {
                 const adoptedPets = data.filter(

@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react'
 import DropdownMenu from './Dropdown'
 
+ const API_HOST = import.meta.env.VITE_API_HOST // Use VITE_API_HOST instead of REACT_API_HOST
+
+
 const Pets = () => {
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [types, setTypes] = useState([])
@@ -11,7 +14,7 @@ const Pets = () => {
     useEffect(() => {
         async function getTypes() {
             try {
-                const response = await fetch('http://localhost:8000/api/pets/')
+                const response = await fetch(`${API_HOST}/api/pets/`)
 
                 if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`)
@@ -30,7 +33,7 @@ const Pets = () => {
     useEffect(() => {
         async function getUser() {
             try {
-                const response = await fetch('http://localhost:8000/api/users')
+                const response = await fetch(`${API_HOST}/api/users`)
 
                 if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`)
@@ -51,7 +54,7 @@ const Pets = () => {
 
         try {
             const response = await fetch(
-                `http://localhost:8000/api/users/${pet.owner_id}`
+                `${API_HOST}/api/users/${pet.owner_id}`
             )
 
             if (!response.ok) {
