@@ -213,9 +213,8 @@ const UserPetList = ({ user }) => {
                                                 </label>
                                                 <label className="text-gray-700">
                                                     Type:
-                                                    <input
+                                                    <select
                                                         className="border-2 rounded-lg focus:border-blue-500 focus:border-4 focus:outline-none focus:shadow-2xl ml-3"
-                                                        type="text"
                                                         value={
                                                             selectedPet.pet_type
                                                         }
@@ -227,7 +226,20 @@ const UserPetList = ({ user }) => {
                                                                         .value,
                                                             })
                                                         }
-                                                    />
+                                                    >
+                                                        <option value="Cat">
+                                                            Cat
+                                                        </option>
+                                                        <option value="Dog">
+                                                            Dog
+                                                        </option>
+                                                        <option value="Horse">
+                                                            Horse
+                                                        </option>
+                                                        <option value="Other">
+                                                            Other
+                                                        </option>
+                                                    </select>
                                                 </label>
                                                 <label className="text-gray-700">
                                                     Description:
