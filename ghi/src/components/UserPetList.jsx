@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 
- const API_HOST = import.meta.env.VITE_API_HOST // Use VITE_API_HOST instead of REACT_API_HOST
-
+const API_HOST = import.meta.env.VITE_API_HOST // Use VITE_API_HOST instead of REACT_API_HOST
 
 const UserPetList = ({ user }) => {
     const [pets, setPets] = useState([])
@@ -220,12 +219,15 @@ const UserPetList = ({ user }) => {
                                                     <input
                                                         className="border-2 rounded-lg focus:border-blue-500 focus:border-4 focus:outline-none focus:shadow-2xl ml-3"
                                                         type="text"
-                                                        value={selectedPet.type}
+                                                        value={
+                                                            selectedPet.pet_type
+                                                        }
                                                         onChange={(e) =>
                                                             setSelectedPet({
                                                                 ...selectedPet,
-                                                                type: e.target
-                                                                    .value,
+                                                                pet_type:
+                                                                    e.target
+                                                                        .value,
                                                             })
                                                         }
                                                     />

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-    const API_HOST = import.meta.env.VITE_API_HOST // Use VITE_API_HOST instead of REACT_API_HOST
+const API_HOST = import.meta.env.VITE_API_HOST
 
 const UserContactCard = ({ user }) => {
     const [userData, setUserData] = useState(null)
@@ -10,9 +10,7 @@ const UserContactCard = ({ user }) => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch(
-                    `${API_HOST}/api/users/${user.id}`
-                )
+                const response = await fetch(`${API_HOST}/api/users/${user.id}`)
                 const data = await response.json()
                 setUserData(data)
                 setEditData(data)
@@ -34,17 +32,14 @@ const UserContactCard = ({ user }) => {
     const handleSubmit = async (event) => {
         event.preventDefault()
         try {
-            const response = await fetch(
-                `${API_HOST}/api/users/${user.id}`,
-                {
-                    method: 'PUT',
-                    credentials: 'include',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(editData),
-                }
-            )
+            const response = await fetch(`${API_HOST}/api/users/${user.id}`, {
+                method: 'PUT',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(editData),
+            })
             if (response.ok) {
                 setUserData(editData)
                 setShowModal(false)

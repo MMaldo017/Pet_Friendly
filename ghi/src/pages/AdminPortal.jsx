@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import UserPetList from '../components/UserPetList'
 import UserContactCard from '../components/UserContactCard'
 import CreatePetButton from '../components/CreatePetButton'
+import CustomerServiceCard from '../components/CustomerServiceCard'
 import { useEffect } from 'react'
 import { fetchByToken } from '../store/userSlice'
 
@@ -35,6 +36,7 @@ const AdminPortal = () => {
                 <div className="sticky top-0">
                     {user && <UserContactCard user={user} />}
                 </div>
+                <div>{user && <CustomerServiceCard user={user} />}</div>
             </div>
         </div>
     )
