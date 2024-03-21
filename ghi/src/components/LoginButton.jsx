@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
 import useToken from '@galvanize-inc/jwtdown-for-react'
 import { IoClose } from 'react-icons/io5'
@@ -51,6 +51,7 @@ const LoginButton = () => {
             handleLogoutAlert()
             setButtonVisible(false)
             setUsername('')
+            localStorage.removeItem('username')
             setTimeout(() => {
                 setButtonVisible(true)
             }, 4000)
@@ -78,6 +79,7 @@ const LoginButton = () => {
                 handleLoginAlert()
                 setButtonVisible(false)
                 setUsername(logInData.username)
+                localStorage.setItem('username', logInData.username)
                 setTimeout(() => {
                     setButtonVisible(true)
                 }, 4000)
@@ -89,6 +91,13 @@ const LoginButton = () => {
             console.error('Log in failed', error)
         }
     }
+
+    useEffect(() => {
+        const currentUsername = localStorage.getItem('username')
+        if (currentUsername) {
+            setUsername(currentUsername)
+        }
+    }, [])
     return (
         <>
             <div className="relative">
