@@ -57,8 +57,10 @@ const UserPetList = ({ user }) => {
             <div className="overflow-x-auto w-full">
                 <div className="min-w-screen flex justify-center font-sans overflow-auto w-full">
                     <div className="w-full">
-                        <div className="bg-white shadow-md rounded my-6">
-                            <div className="text-2xl">Your Pets</div>
+                        <div className="bg-white shadow-md rounded">
+                            <div className="text-3xl font-bold text-center border-b-2 border-blue-500">
+                                Your Pets
+                            </div>
                             <table className="min-w-max w-full table-auto">
                                 <thead>
                                     <tr className="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
@@ -169,6 +171,8 @@ const UserPetList = ({ user }) => {
                                                     <input
                                                         className="border-2 rounded-lg focus:border-blue-500 focus:border-4 focus:outline-none focus:shadow-2xl ml-3"
                                                         type="text"
+                                                        autoComplete="off"
+                                                        id="name"
                                                         value={selectedPet.name}
                                                         onChange={(e) =>
                                                             setSelectedPet({
@@ -184,6 +188,8 @@ const UserPetList = ({ user }) => {
                                                     <input
                                                         className="border-2 rounded-lg focus:border-blue-500 focus:border-4 focus:outline-none focus:shadow-2xl ml-3"
                                                         type="text"
+                                                        autoComplete="off"
+                                                        id="age"
                                                         value={selectedPet.age}
                                                         onChange={(e) =>
                                                             setSelectedPet({
@@ -199,6 +205,8 @@ const UserPetList = ({ user }) => {
                                                     <input
                                                         className="border-2 rounded-lg focus:border-blue-500 focus:border-4 focus:outline-none focus:shadow-2xl ml-3"
                                                         type="text"
+                                                        autoComplete="off"
+                                                        id="breed"
                                                         value={
                                                             selectedPet.breed
                                                         }
@@ -215,6 +223,8 @@ const UserPetList = ({ user }) => {
                                                     Type:
                                                     <select
                                                         className="border-2 rounded-lg focus:border-blue-500 focus:border-4 focus:outline-none focus:shadow-2xl ml-3"
+                                                        autoComplete="off"
+                                                        id="pet_type"
                                                         value={
                                                             selectedPet.pet_type
                                                         }
@@ -246,6 +256,8 @@ const UserPetList = ({ user }) => {
                                                     <input
                                                         className="border-2 rounded-lg focus:border-blue-500 focus:border-4 focus:outline-none focus:shadow-2xl ml-3"
                                                         type="text"
+                                                        autoComplete="off"
+                                                        id="description"
                                                         value={
                                                             selectedPet.description
                                                         }
@@ -263,6 +275,8 @@ const UserPetList = ({ user }) => {
                                                     Adoption Status:
                                                     <select
                                                         className="border-2 rounded-lg focus:border-blue-500 focus:border-4 focus:outline-none focus:shadow-2xl ml-3"
+                                                        autoComplete="off"
+                                                        id="adoption_status"
                                                         value={
                                                             selectedPet.adoption_status
                                                         }
@@ -288,6 +302,8 @@ const UserPetList = ({ user }) => {
                                                     <input
                                                         className="border-2 rounded-lg focus:border-blue-500 focus:border-4 focus:outline-none focus:shadow-2xl ml-3"
                                                         type="date"
+                                                        autoComplete="off"
+                                                        id="day_in"
                                                         value={
                                                             selectedPet.day_in
                                                         }
@@ -305,6 +321,8 @@ const UserPetList = ({ user }) => {
                                                     <input
                                                         className="border-2 rounded-lg focus:border-blue-500 focus:border-4 focus:outline-none focus:shadow-2xl ml-3"
                                                         type="date"
+                                                        autoComplete="off"
+                                                        id="day_out"
                                                         value={
                                                             selectedPet.day_out
                                                         }
@@ -323,6 +341,8 @@ const UserPetList = ({ user }) => {
                                                     <input
                                                         className="border-2 rounded-lg focus:border-blue-500 focus:border-4 focus:outline-none focus:shadow-2xl ml-3"
                                                         type="url"
+                                                        autoComplete="off"
+                                                        id="photo_url"
                                                         value={
                                                             selectedPet.photo_url
                                                         }

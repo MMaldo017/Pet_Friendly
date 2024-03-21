@@ -46,23 +46,27 @@ const CustomerServiceCard = ({ user }) => {
         <div className="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl m-3">
             <div className="md:flex">
                 <div className="p-8">
-                    <div className="uppercase tracking-wide text-xl text-blue-500 font-semibold">
+                    <div className="uppercase tracking-wide text-xl text-blue-500 font-semibold border-b-2 border-gray-50">
                         Have a question?
                     </div>
-                    <p className="mt-2 text-gray-500 py-2">
+                    <p className="mt-2 text-gray-500">
                         Reach out to devs@fakeemail.com for assistance and bug
                         fixes!
                     </p>
-                    <p className="mt-2 text-gray-500 py-2">
-                        If you wish to delete your account click the button
-                        below.
-                    </p>
-                    <button
-                        onClick={() => setShowModal(true)}
-                        className="mt-3 px-4 py-2 bg-red-600 text-white text-base font-medium rounded-md hover:bg-red-700"
-                    >
-                        Delete Account
-                    </button>
+                    <div>
+                        <p className="mt-2 text-gray-500 py-2">
+                            If you wish to delete your account click the button
+                            below.
+                        </p>
+                        <div>
+                            <button
+                                onClick={() => setShowModal(true)}
+                                className="px-4 py-2 bg-red-600 text-white text-base font-medium rounded-md hover:bg-red-700"
+                            >
+                                Delete Account
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
             {showModal && (

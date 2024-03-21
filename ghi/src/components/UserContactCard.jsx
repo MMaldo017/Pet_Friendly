@@ -53,9 +53,11 @@ const UserContactCard = ({ user }) => {
 
     return userData ? (
         <div className="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl m-3">
-            <div className="md:flex">
+            <div className="w-full">
                 <div className="p-8">
-                    <h1 className="text-3xl font-bold">{userData.name}</h1>
+                    <h1 className="text-3xl font-bold border-b-2 border-blue-500">
+                        {userData.name}
+                    </h1>
                     <div className="uppercase tracking-wide text-sm text-blue-500 font-semibold py-1">
                         User ID: {userData.id}
                     </div>
@@ -69,12 +71,14 @@ const UserContactCard = ({ user }) => {
                     <p className="mt-2 text-gray-600 py-1">
                         {userData.state}, {userData.zip_code}
                     </p>
-                    <button
-                        onClick={() => setShowModal(true)}
-                        className="mt-4 inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                    >
-                        Edit
-                    </button>
+                    <div>
+                        <button
+                            onClick={() => setShowModal(true)}
+                            className="inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                        >
+                            Edit
+                        </button>
+                    </div>
                 </div>
             </div>
             {showModal && (
@@ -103,7 +107,7 @@ const UserContactCard = ({ user }) => {
                                 <h1 className="text-3xl font-bold">
                                     Update Shelter Info
                                 </h1>
-                                <label>
+                                <label htmlFor="name">
                                     Name:
                                     <input
                                         className="border-2 rounded-lg focus:border-blue-500 focus:border-4 focus:outline-none focus:shadow-2xl ml-3"
@@ -111,6 +115,8 @@ const UserContactCard = ({ user }) => {
                                         name="name"
                                         value={editData.name}
                                         onChange={handleInputChange}
+                                        autoComplete="off"
+                                        id="name"
                                     />
                                 </label>
                                 <label>
@@ -121,6 +127,8 @@ const UserContactCard = ({ user }) => {
                                         name="phone_number"
                                         value={editData.phone_number}
                                         onChange={handleInputChange}
+                                        autoComplete="off"
+                                        id="phone_number"
                                     />
                                 </label>
                                 <label>
@@ -131,6 +139,8 @@ const UserContactCard = ({ user }) => {
                                         name="email"
                                         value={editData.email}
                                         onChange={handleInputChange}
+                                        autoComplete="off"
+                                        id="email"
                                     />
                                 </label>
                                 <label>
@@ -141,6 +151,8 @@ const UserContactCard = ({ user }) => {
                                         name="address"
                                         value={editData.address}
                                         onChange={handleInputChange}
+                                        autoComplete="off"
+                                        id="address"
                                     />
                                 </label>
                                 <label>
@@ -152,6 +164,8 @@ const UserContactCard = ({ user }) => {
                                         maxLength={2}
                                         value={editData.state}
                                         onChange={handleInputChange}
+                                        autoComplete="off"
+                                        id="state"
                                     />
                                 </label>
                                 <label>
@@ -163,6 +177,8 @@ const UserContactCard = ({ user }) => {
                                         maxLength={5}
                                         value={editData.zip_code}
                                         onChange={handleInputChange}
+                                        autoComplete="off"
+                                        id="zip_code"
                                     />
                                 </label>
                                 <button

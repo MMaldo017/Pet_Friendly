@@ -62,7 +62,10 @@ function CreatePetForm() {
                     <h1 className="text-3xl font-bold mb-[0.5rem]">
                         Add A Pet!
                     </h1>
-                    <div className="block text-gray-700 text-sm font-bold mb-[0.5rem]">
+                    <div
+                        className="block text-gray-700 text-sm font-bold mb-[0.5rem]"
+                        htmlFor="name"
+                    >
                         Name
                     </div>
                     <input
@@ -71,8 +74,14 @@ function CreatePetForm() {
                         onChange={handleChange}
                         className="shadow appearance-none border rounded w-full py-[0.7rem] px-[0.7rem] text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         placeholder="Name"
+                        autoComplete="off"
+                        id="name"
+                        required
                     />
-                    <div className="block text-gray-700 text-sm font-bold mb-[0.5rem]">
+                    <div
+                        className="block text-gray-700 text-sm font-bold mb-[0.5rem]"
+                        htmlFor="age"
+                    >
                         Age
                     </div>
                     <input
@@ -81,8 +90,14 @@ function CreatePetForm() {
                         onChange={handleChange}
                         className="shadow appearance-none border rounded w-full py-[0.7rem] px-[0.7rem] text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         placeholder="Age"
+                        autoComplete="off"
+                        id="age"
+                        required
                     />
-                    <div className="block text-gray-700 text-sm font-bold mb-[0.5rem]">
+                    <div
+                        className="block text-gray-700 text-sm font-bold mb-[0.5rem]"
+                        htmlFor="breed"
+                    >
                         Breed
                     </div>
                     <input
@@ -91,14 +106,23 @@ function CreatePetForm() {
                         onChange={handleChange}
                         className="shadow appearance-none border rounded w-full py-[0.7rem] px-[0.7rem] text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         placeholder="Breed"
+                        autoComplete="off"
+                        id="breed"
+                        required
                     />
-                    <div className="block text-gray-700 text-sm font-bold mb-[0.5rem]">
+                    <div
+                        className="block text-gray-700 text-sm font-bold mb-[0.5rem]"
+                        htmlFor="pet_type"
+                    >
                         Pet Type
                     </div>
                     <select
                         name="pet_type"
                         value={form.pet_type}
                         onChange={handleChange}
+                        required
+                        autoComplete="off"
+                        id="pet_type"
                         className="shadow appearance-none border rounded w-full py-[0.7rem] px-[0.7rem] text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     >
                         <option value="Cat">Cat</option>
@@ -106,7 +130,10 @@ function CreatePetForm() {
                         <option value="Horse">Horse</option>
                         <option value="Other">Other</option>
                     </select>
-                    <div className="block text-gray-700 text-sm font-bold mb-[0.5rem]">
+                    <div
+                        className="block text-gray-700 text-sm font-bold mb-[0.5rem]"
+                        htmlFor="day_in"
+                    >
                         Day They Arrived at Shelter
                     </div>
                     <input
@@ -116,13 +143,28 @@ function CreatePetForm() {
                         onChange={handleChange}
                         className="w-full p-2 border border-gray-300 rounded"
                         placeholder="Day Arrived at Shelter"
+                        autoComplete="off"
+                        id="day_in"
+                        required
                     />
-                    <button
-                        type="submit"
-                        className="w-full p-2 bg-blue-500 text-white rounded"
-                    >
-                        Submit
-                    </button>
+                    <div className="bg-gray-50 px-2 py-3 sm:px-6 flex items-center justify-between space-x-4">
+                        <button
+                            onClick={handleSubmit}
+                            type="button"
+                            className="flex-grow inline-flex justify-center rounded-md border border-transparent shadow-sm px-6 py-4 bg-blue-500 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:text-lg"
+                            style={{ flexBasis: '40%' }}
+                        >
+                            Confirm
+                        </button>
+                        <button
+                            onClick={() => navigate('/portal')}
+                            type="button"
+                            className="flex-grow mt-3 inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-6 py-4 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:text-lg"
+                            style={{ flexBasis: '40%' }}
+                        >
+                            Cancel
+                        </button>
+                    </div>
                 </form>
             </div>
         </div>
