@@ -3,9 +3,6 @@ import { useEffect, useState } from 'react'
 import '../App.css'
 import Alert from '../components/Alert'
 
-
-
-
 const SignUpPage = () => {
     const API_HOST = import.meta.env.VITE_API_HOST // Use VITE_API_HOST instead of REACT_API_HOST
     const [formData, setFormData] = useState({
@@ -63,11 +60,9 @@ const SignUpPage = () => {
         getUsers()
     }, [])
 
-    const filteredUsernames = users.map((user) => user.username)
-
     useEffect(() => {
-        setUsernames(filteredUsernames)
-    }, [users, filteredUsernames])
+        setUsernames(users.map((user) => user.username))
+    }, [users])
 
     const validateUser = () => {
         return usernames.includes(formData.username) ? (
@@ -231,12 +226,14 @@ const SignUpPage = () => {
                         />
                         {formData.phone_number &&
                         formData.phone_number.length !== 10 ? (
-                            <p className="text-red-700">
-                                Please enter a valid 10 digit phone number
+                            <div className="text-red-700">
+                                <p>
+                                    Please enter a valid 10 digit phone number
+                                </p>
                                 <p className="text-green-600">
                                     i.e. 1234567890
                                 </p>
-                            </p>
+                            </div>
                         ) : null}
                     </div>
                     <div className="flex flex-col mt-[1.3rem]">
