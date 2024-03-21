@@ -1,4 +1,3 @@
-//@ts-check
 /**
  * @typedef {{module: number, week: number, day: number, min: number, hour: number}} LaunchInfo
  *

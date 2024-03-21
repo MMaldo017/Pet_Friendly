@@ -1,6 +1,5 @@
 steps = [
     [
-        # "Up" SQL statement
         """
         CREATE TABLE users (
             id SERIAL PRIMARY KEY NOT NULL,
@@ -14,13 +13,11 @@ steps = [
             zip_code CHAR(5) NOT NULL
         );
         """,
-        # "Down" SQL statement
         """
         DROP TABLE users;
         """,
     ],
     [
-        # "Up" SQL statement
         """
         CREATE TABLE pets (
             id SERIAL PRIMARY KEY NOT NULL,
@@ -36,7 +33,6 @@ steps = [
             photo_url VARCHAR
         );
         """,
-        # "Down" SQL statement
         """
         DROP TABLE pets;
         """,

@@ -38,7 +38,6 @@ def test_get_all_pets():
 
 
 def test_create_pet():
-    # ARRANGE
     app.dependency_overrides[PetRepository] = CreatePetQueries
     pet_data = {
         "name": "Test Pet",
@@ -71,7 +70,7 @@ def test_create_pet():
             "&pid=Api&P=0&h=220"
         ),
     }
-    # ACT
+
     token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI5NGU"
     "4ZWE3ZC00NjIzLTRkY2UtYjlhZi1kNmQzZGE3ZDg3NDUiLCJleHAiOjE3MTA4"
     "NjY3MDYsInN1YiI6Im1hcnRpbkBlbWFpbC5jb20iLCJhY2NvdW50Ijp7ImlkI"
@@ -81,10 +80,7 @@ def test_create_pet():
     "lwX2NvZGUiOiIxMjM0NSJ9fQ.pIndrSmW1mH1FwAygc1mhEZyXMLgeD3kLO1p8o_mOOM"
     headers = {"Authorization": f"Bearer {token}"}
     response = client.post("/api/pets", json=pet_data, headers=headers)
-    print("RESPONSE", response.status_code)
-    print("RESPONSE", response.json())
     app.dependency_overrides = {}
-    # ASSERT
     assert response.status_code == 200
     assert response.json() == expected
 

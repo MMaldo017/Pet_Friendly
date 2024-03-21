@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 
- const API_HOST = import.meta.env.VITE_API_HOST // Use VITE_API_HOST instead of REACT_API_HOST
-
+const API_HOST = import.meta.env.VITE_API_HOST
 
 const DropdownMenu = ({ setSelectedType }) => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false)

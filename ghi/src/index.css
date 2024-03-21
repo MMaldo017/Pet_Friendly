@@ -1,7 +1,6 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-/* You should probably replace with with your own CSS */
 
 body {
     margin: 0;

@@ -1,9 +1,4 @@
-// This makes VSCode check types as if you are using TypeScript
-//@ts-check
-// import { BrowserRouter } from 'react-router-dom' // Import BrowserRouter
-// import ErrorNotification from './ErrorNotification'
-// import Construct from './Construct'
-import Home from './pages/Home' // Import Home from the pages directory
+import Home from './pages/Home'
 import './App.css'
 import Navbar from './components/Navbar.jsx'
 import LoginButton from './components/LoginButton'
@@ -15,11 +10,10 @@ import store from './store/store'
 import CreatePetForm from './pages/CreatePet'
 import AdminPortal from './pages/AdminPortal'
 
-// All your environment variables in vite are in this object
 console.table(import.meta.env)
-const API_HOST = import.meta.env.VITE_API_HOST // Use VITE_API_HOST instead of REACT_API_HOST
+const API_HOST = import.meta.env.VITE_API_HOST
 if (!API_HOST) {
-    throw new Error('VITE_API_HOST is not defined') // Update the error message to reflect the change
+    throw new Error('VITE_API_HOST is not defined')
 }
 
 function App() {

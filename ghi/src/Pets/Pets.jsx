@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react'
 import DropdownMenu from './Dropdown'
 
- const API_HOST = import.meta.env.VITE_API_HOST // Use VITE_API_HOST instead of REACT_API_HOST
-
+const API_HOST = import.meta.env.VITE_API_HOST
 
 const Pets = () => {
     const [isModalOpen, setIsModalOpen] = useState(false)

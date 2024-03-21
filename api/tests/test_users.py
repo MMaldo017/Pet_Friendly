@@ -67,7 +67,6 @@ def test_delete_user():
     headers = {"Authorization": f"Bearer {token}"}
     response = client.delete(f"/api/users/{user_id}", headers=headers)
     app.dependency_overrides = {}
-    print(response.json())
     assert response.status_code == 200
     assert response.json()
 
@@ -101,7 +100,6 @@ def test_get_all_user_pets():
 
 
 def test_create_user():
-    # ARRANGE
     app.dependency_overrides[UserRepository] = CreateUserQueries
     user_data = {
         "name": "Test User",
@@ -113,7 +111,6 @@ def test_create_user():
         "state": "la",
         "zip_code": "12345",
     }
-    # ACT
     token = (
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI0M2RkNjBlNS1iNWIw"
         "LTRhNGUtYTg2ZC1kMDRkZTU2MGQ2YTEiLCJleHAiOjE3MTA0Mzg4MzEsInN1YiI6I"
@@ -126,10 +123,7 @@ def test_create_user():
 
     headers = {"Authorization": f"Bearer {token}"}
     response = client.post("/api/users", json=user_data, headers=headers)
-    print("RESPONSE", response.status_code)
-    print("RESPONSE", response.json())
     app.dependency_overrides = {}
-    # ASSERT
     assert response.status_code == 200
     assert "access_token" in response.json()
     assert "token_type" in response.json()

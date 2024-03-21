@@ -1,10 +1,9 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react'
 import '../App.css'
 import Alert from '../components/Alert'
 
 const SignUpPage = () => {
-    const API_HOST = import.meta.env.VITE_API_HOST // Use VITE_API_HOST instead of REACT_API_HOST
+    const API_HOST = import.meta.env.VITE_API_HOST
     const [formData, setFormData] = useState({
         username: '',
         password: '',
@@ -40,25 +39,24 @@ const SignUpPage = () => {
         }
     }
 
-    const getUsers = async () => {
-        const url = `${API_HOST}/api/usernames`
-        const fetchOptions = {
-            method: 'GET',
-        }
-        const req = await fetch(url, fetchOptions)
-        try {
-            if (req.ok) {
-                const data = await req.json()
-                setUsers(data)
-            }
-        } catch (error) {
-            console.error('Error:', error)
-        }
-    }
-
     useEffect(() => {
+        const getUsers = async () => {
+            const url = `${API_HOST}/api/usernames`
+            const fetchOptions = {
+                method: 'GET',
+            }
+            const req = await fetch(url, fetchOptions)
+            try {
+                if (req.ok) {
+                    const data = await req.json()
+                    setUsers(data)
+                }
+            } catch (error) {
+                console.error('Error:', error)
+            }
+        }
         getUsers()
-    }, [])
+    }, [API_HOST])
 
     useEffect(() => {
         setUsernames(users.map((user) => user.username))

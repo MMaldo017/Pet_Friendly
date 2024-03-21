@@ -82,7 +82,6 @@ class UsernamesOut(BaseModel):
 class UserRepository:
     def get_all_user_detail(self) -> Union[Error, List[UsernamesOut]]:
         try:
-            # connect the database
             with pool.connection() as conn:
                 with conn.cursor() as db:
                     result = db.execute(

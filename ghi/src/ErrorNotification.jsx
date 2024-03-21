@@ -1,4 +1,3 @@
-//@ts-check
 /**
  * @param {{error?: string}} props
  * @returns {React.ReactNode}
