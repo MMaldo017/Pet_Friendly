@@ -12,7 +12,7 @@ const Navbar = () => {
     return (
         <>
             <nav className="flex items-center justify-between  p-[1rem] bg-blue-500">
-                <NavLink to="/" className="text-2xl font-bold">
+                <NavLink to="/pet-friendly" className="text-2xl font-bold">
                     Pet Friendly
                 </NavLink>
                 <ul className="hidden md:flex gap-[2rem] items-center">
@@ -25,7 +25,7 @@ const Navbar = () => {
                         <NavLink to="/pets">Pets</NavLink>
                     </li>
                     <li className="hover:text-white transition-colors duration-300">
-                        <NavLink to="/">Home</NavLink>
+                        <NavLink to="/pet-friendly">Home</NavLink>
                     </li>
                 </ul>
                 <div className="flex items-center gap-[1rem]">

@@ -23,19 +23,18 @@ if (!API_HOST) {
 }
 
 function App() {
-
     return (
         <div>
             <Navbar />
             <Provider store={store}>
-            <Routes>
-                <Route element={<LoginButton />} />
-                <Route path="/signup" element={<SignUpPage />} />
-                <Route path="/pets" element={<Pets />} />
-                <Route path="/pets/new" element={<CreatePetForm />} />
-                <Route path="/" element={<Home />} />
-                <Route path="/portal" element={<AdminPortal />} />
-            </Routes>
+                <Routes>
+                    <Route element={<LoginButton />} />
+                    <Route path="/signup" element={<SignUpPage />} />
+                    <Route path="/pets" element={<Pets />} />
+                    <Route path="/pets/new" element={<CreatePetForm />} />
+                    <Route path="/pet-friendly" element={<Home />} />
+                    <Route path="/portal" element={<AdminPortal />} />
+                </Routes>
             </Provider>
         </div>
     )
