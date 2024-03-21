@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
 import useToken from '@galvanize-inc/jwtdown-for-react'
 import { IoClose } from 'react-icons/io5'
@@ -18,6 +18,7 @@ const LoginButton = () => {
     const [logOutAlert, setLogoutAlert] = useState(false)
     const [loginError, setLoginError] = useState(false)
     const [buttonVisible, setButtonVisible] = useState(true)
+    const [username, setUsername] = useState('')
 
     const handleLogoutAlert = () => {
         setLogoutAlert(true)
@@ -49,7 +50,8 @@ const LoginButton = () => {
             await logout(FormData.username, FormData.password)
             handleLogoutAlert()
             setButtonVisible(false)
-
+            setUsername('')
+            localStorage.removeItem('username')
             setTimeout(() => {
                 setButtonVisible(true)
             }, 4000)
@@ -76,6 +78,8 @@ const LoginButton = () => {
                 event.target.reset()
                 handleLoginAlert()
                 setButtonVisible(false)
+                setUsername(logInData.username)
+                localStorage.setItem('username', logInData.username)
                 setTimeout(() => {
                     setButtonVisible(true)
                 }, 4000)
@@ -87,6 +91,13 @@ const LoginButton = () => {
             console.error('Log in failed', error)
         }
     }
+
+    useEffect(() => {
+        const currentUsername = localStorage.getItem('username')
+        if (currentUsername) {
+            setUsername(currentUsername)
+        }
+    }, [])
     return (
         <>
             <div className="relative">
@@ -99,12 +110,18 @@ const LoginButton = () => {
                     </button>
                 ) : null}
                 {!!token === true && buttonVisible && (
-                    <button
-                        onClick={handleFormLogOut}
-                        className="cursor-pointer pt-[0.5rem] pb-[0.5rem] pr-[1rem] pl-[1rem] bg-green-500 rounded-lg hover:bg-green-600 hover:text-white transition-colors duration-300"
-                    >
-                        Log Out
-                    </button>
+                    <div className="flex flex-col justify-center">
+                        <div className="flex gap-1 mb-1">
+                            <p>Hello, </p>
+                            <p className="font-bold">{username} 👋</p>
+                        </div>
+                        <button
+                            onClick={handleFormLogOut}
+                            className="cursor-pointer pt-[0.5rem] pb-[0.5rem] pr-[1rem] pl-[1rem] bg-green-500 rounded-lg hover:bg-green-600 hover:text-white transition-colors duration-300"
+                        >
+                            Log Out
+                        </button>
+                    </div>
                 )}
                 {isOpen && (
                     <div className="absolute right-0 mt-[0.5rem] w-[15rem] bg-white rounded-lg shadow-lg z-50">
