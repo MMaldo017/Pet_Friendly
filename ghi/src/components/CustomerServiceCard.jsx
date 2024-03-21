@@ -33,7 +33,7 @@ const CustomerServiceCard = ({ user }) => {
                 }
 
                 setShowModal(false)
-                navigate('/')
+                navigate('/pet-friendly/')
                 window.location.reload()
             } else {
                 console.log('Error deleting user:', await response.text())
