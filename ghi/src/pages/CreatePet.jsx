@@ -95,13 +95,17 @@ function CreatePetForm() {
                     <div className="block text-gray-700 text-sm font-bold mb-[0.5rem]">
                         Pet Type
                     </div>
-                    <input
+                    <select
                         name="pet_type"
                         value={form.pet_type}
                         onChange={handleChange}
                         className="shadow appearance-none border rounded w-full py-[0.7rem] px-[0.7rem] text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        placeholder="Pet Type"
-                    />
+                    >
+                        <option value="Cat">Cat</option>
+                        <option value="Dog">Dog</option>
+                        <option value="Horse">Horse</option>
+                        <option value="Other">Other</option>
+                    </select>
                     <div className="block text-gray-700 text-sm font-bold mb-[0.5rem]">
                         Day They Arrived at Shelter
                     </div>

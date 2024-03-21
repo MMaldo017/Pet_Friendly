@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react'
 import './Home.css'
 
- const API_HOST = import.meta.env.VITE_API_HOST // Use VITE_API_HOST instead of REACT_API_HOST
-
+const API_HOST = import.meta.env.VITE_API_HOST // Use VITE_API_HOST instead of REACT_API_HOST
 
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
@@ -22,11 +21,11 @@ const Home = () => {
             .then((response) => response.json())
             .then((data) => {
                 const adoptedPets = data.filter(
-                    (pet) => pet.adoption_status === 'adopted'
+                    (pet) => pet.adoption_status === 'Adopted'
                 )
                 setAdoptedPetsCount(adoptedPets.length)
                 const availablePets = data.filter(
-                    (pet) => pet.adoption_status !== 'adopted'
+                    (pet) => pet.adoption_status !== 'Adopted'
                 )
                 setPets(shuffleArray(availablePets).reverse())
             })
