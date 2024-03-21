@@ -55,7 +55,7 @@ const LoginButton = () => {
             setTimeout(() => {
                 setButtonVisible(true)
             }, 4000)
-            navigate('/')
+            navigate('/pet-friendly')
         } catch (error) {
             console.error('Log out failed', error)
         }
