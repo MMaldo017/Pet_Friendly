@@ -15,7 +15,6 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         os.environ.get("CORS_HOST"),
-        "https://pet_friendly.gitlab.io"
     ],
     allow_credentials=True,
     allow_methods=["*"],
