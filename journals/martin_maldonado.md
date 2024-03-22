@@ -12,7 +12,7 @@ out our database tables to include just users and pets.
 ## Week2:
 
 Purpose-
-create an endpoint and start our backend authorization
+create get_all_pets fastapi endpoint and get_all and get_all Pydantic models. Also, PetIn and PetOut
 Issues-
 We had an issue with our UserOut model, where we werent getting back the id created by the database(resolved)
 Getting a 401 error when creating a user but the user was still being creted in the database(resolved by a sytax error where the user was being created(users.py - router.post), it was adding the email instead of the username)
@@ -22,7 +22,7 @@ Team works really well and we solve issues pretty quickly
 ## Week3:
 
 Purpose-
-To finish our backend authrorization and start our front end components
+To finish our backend authrorization and start our front end components. Started and finished Pets.jsx and Dropdown.jsx
 Issues-
 We had an issue where we needed to update the sql to include a photo_url. It was pretty simple, we just needed to import AllUrl in order
 to have basic url imputs into the sql database
@@ -34,7 +34,7 @@ state.
 ## Week4:
 
 Purpose:
-To finish our frontend components, global state, and unittest
+To finish our frontend components, global state, and completed test_get_user in test_users.py
 Issues:
 No issues this week:
 Comments:
